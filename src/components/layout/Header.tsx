@@ -19,7 +19,6 @@ export default function Header() {
       <div className="max-w-6xl mx-auto px-4 h-14 flex items-center justify-between">
         {/* Logo */}
         <Link to="/" className="flex items-center gap-2 font-serif font-bold text-lg tracking-wide">
-          <span className="text-xl">✦</span>
           <span>Context Bible</span>
         </Link>
 
