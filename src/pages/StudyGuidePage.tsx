@@ -3,6 +3,7 @@ import { BIBLE_PEOPLE, type BiblePerson } from '../data/studyPeople';
 import { BIBLE_PLACES, type BiblePlace } from '../data/studyPlaces';
 import { BIBLE_CONTROVERSIES, type BibleControversy } from '../data/studyControversies';
 import { CHRISTIAN_DEBATES, type ChristianDebate } from '../data/studyDebates';
+import { PEOPLE_SOURCES, PLACES_SOURCES, CONTROVERSY_SOURCES, DEBATE_SOURCES } from '../data/studySources';
 import VerseLink from '../components/bible/VerseLink';
 
 // ─── How-to-study sections ────────────────────────────────────────────────────
@@ -90,6 +91,7 @@ const SECTIONS = [
 
 // ─── Sub-components ───────────────────────────────────────────────────────────
 function PersonDetail({ person }: { person: BiblePerson }) {
+  const sources = PEOPLE_SOURCES[person.id] ?? [];
   return (
     <article className="space-y-6">
       <div className="border-b border-gray-200 pb-4">
@@ -132,11 +134,33 @@ function PersonDetail({ person }: { person: BiblePerson }) {
           ))}
         </ul>
       </section>
+
+      {sources.length > 0 && (
+        <section>
+          <h2 className="font-serif font-semibold text-gray-800 text-base mb-2">Sources &amp; Further Reading</h2>
+          <ul className="space-y-1.5">
+            {sources.map((src, i) => (
+              <li key={i}>
+                <a
+                  href={src.url}
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  className="text-sm text-scripture-600 hover:text-scripture-800 hover:underline flex items-center gap-1.5"
+                >
+                  <span className="text-xs opacity-70">↗</span>
+                  <span>{src.label}</span>
+                </a>
+              </li>
+            ))}
+          </ul>
+        </section>
+      )}
     </article>
   );
 }
 
 function PlaceDetail({ place }: { place: BiblePlace }) {
+  const sources = PLACES_SOURCES[place.id] ?? [];
   return (
     <article className="space-y-6">
       <div className="border-b border-gray-200 pb-4">
@@ -179,11 +203,33 @@ function PlaceDetail({ place }: { place: BiblePlace }) {
           ))}
         </ul>
       </section>
+
+      {sources.length > 0 && (
+        <section>
+          <h2 className="font-serif font-semibold text-gray-800 text-base mb-2">Sources &amp; Further Reading</h2>
+          <ul className="space-y-1.5">
+            {sources.map((src, i) => (
+              <li key={i}>
+                <a
+                  href={src.url}
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  className="text-sm text-scripture-600 hover:text-scripture-800 hover:underline flex items-center gap-1.5"
+                >
+                  <span className="text-xs opacity-70">↗</span>
+                  <span>{src.label}</span>
+                </a>
+              </li>
+            ))}
+          </ul>
+        </section>
+      )}
     </article>
   );
 }
 
 function ControversyDetail({ controversy }: { controversy: BibleControversy }) {
+  const sources = CONTROVERSY_SOURCES[controversy.id] ?? [];
   return (
     <article className="space-y-6">
       <div className="border-b border-gray-200 pb-4">
@@ -232,11 +278,33 @@ function ControversyDetail({ controversy }: { controversy: BibleControversy }) {
           ))}
         </ul>
       </section>
+
+      {sources.length > 0 && (
+        <section>
+          <h2 className="font-serif font-semibold text-gray-800 text-base mb-2">Sources &amp; Further Reading</h2>
+          <ul className="space-y-1.5">
+            {sources.map((src, i) => (
+              <li key={i}>
+                <a
+                  href={src.url}
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  className="text-sm text-scripture-600 hover:text-scripture-800 hover:underline flex items-center gap-1.5"
+                >
+                  <span className="text-xs opacity-70">↗</span>
+                  <span>{src.label}</span>
+                </a>
+              </li>
+            ))}
+          </ul>
+        </section>
+      )}
     </article>
   );
 }
 
 function DebateDetail({ debate }: { debate: ChristianDebate }) {
+  const sources = DEBATE_SOURCES[debate.id] ?? [];
   const categoryColors: Record<ChristianDebate['category'], string> = {
     Historical: 'bg-blue-100 text-blue-700',
     Theological: 'bg-scripture-100 text-scripture-700',
@@ -304,6 +372,27 @@ function DebateDetail({ debate }: { debate: ChristianDebate }) {
           ))}
         </ul>
       </section>
+
+      {sources.length > 0 && (
+        <section>
+          <h2 className="font-serif font-semibold text-gray-800 text-base mb-2">Sources &amp; Further Reading</h2>
+          <ul className="space-y-1.5">
+            {sources.map((src, i) => (
+              <li key={i}>
+                <a
+                  href={src.url}
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  className="text-sm text-scripture-600 hover:text-scripture-800 hover:underline flex items-center gap-1.5"
+                >
+                  <span className="text-xs opacity-70">↗</span>
+                  <span>{src.label}</span>
+                </a>
+              </li>
+            ))}
+          </ul>
+        </section>
+      )}
     </article>
   );
 }
