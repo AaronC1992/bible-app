@@ -13,7 +13,7 @@ export default function ReadingPlanPage() {
 
   const handleToggle = (planId: string, day: number, completed: boolean) => {
     if (!completed) {
-      markPlanDayComplete(planId, day);
+      markPlanDayComplete(planId, day, true);
       setPlans(getReadingPlans());
     }
   };

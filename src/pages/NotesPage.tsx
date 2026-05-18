@@ -20,19 +20,19 @@ export default function NotesPage() {
   };
 
   const handleSave = (note: UserNote) => {
-    saveNote(note.verseRef, note.verseText, editText);
+    saveNote(note.reference, note.verseText, editText);
     setNotes(getNotes());
     setEditingId(null);
   };
 
   const handleDelete = (note: UserNote) => {
-    deleteNote(note.verseRef);
+    deleteNote(note.reference);
     setNotes(getNotes());
     if (editingId === note.id) setEditingId(null);
   };
 
   const handleOpen = (note: UserNote) => {
-    navigate(`/reader?book=${note.verseRef.bookId}&chapter=${note.verseRef.chapter}&verse=${note.verseRef.verse}`);
+    navigate(`/reader?book=${note.reference.bookId}&chapter=${note.reference.chapter}&verse=${note.reference.verse}`);
   };
 
   return (
@@ -62,7 +62,7 @@ export default function NotesPage() {
               onClick={() => handleOpen(note)}
               className="font-medium text-scripture-700 text-sm hover:text-scripture-900"
             >
-              {note.reference}
+              {note.verseRef}
             </button>
             <div className="flex gap-2 shrink-0">
               {editingId !== note.id && (
