@@ -68,18 +68,48 @@ export default function SearchPage() {
         </button>
       </form>
 
-      {/* Quick reference examples */}
-      <div className="flex flex-wrap gap-2">
-        {['John 3:16', 'Psalm 23', 'Romans 8', 'Genesis 1:1', 'Isaiah 53:5'].map(ex => (
-          <button
-            key={ex}
-            onClick={() => { setQuery(ex); void handleSearch(ex); }}
-            className="text-xs bg-gray-100 text-gray-600 px-3 py-1 rounded-full hover:bg-scripture-100 hover:text-scripture-700 transition-colors"
-          >
-            {ex}
-          </button>
-        ))}
-      </div>
+      {/* Popular topics — shown only before any search */}
+      {!searched && (
+        <div className="space-y-4">
+          {[
+            {
+              label: 'Popular Verses',
+              topics: ['John 3:16', 'Psalm 23', 'Romans 8:28', 'Isaiah 53:5', 'Genesis 1:1', 'Jeremiah 29:11', 'Philippians 4:13', 'Proverbs 3:5–6'],
+            },
+            {
+              label: 'Faith & Salvation',
+              topics: ['grace', 'faith', 'salvation', 'forgiveness', 'repentance', 'eternal life', 'baptism', 'born again'],
+            },
+            {
+              label: 'Comfort & Strength',
+              topics: ['peace', 'hope', 'comfort', 'strength', 'fear not', 'rest', 'healing', 'trust'],
+            },
+            {
+              label: 'Love & Character',
+              topics: ['love', 'joy', 'humility', 'patience', 'kindness', 'mercy', 'wisdom', 'righteousness'],
+            },
+            {
+              label: 'Prayer & Worship',
+              topics: ['prayer', 'praise', 'Holy Spirit', 'worship', 'thanksgiving', 'fasting', 'covenant', 'resurrection'],
+            },
+          ].map(group => (
+            <div key={group.label}>
+              <p className="text-xs font-semibold text-gray-400 uppercase tracking-wider mb-2">{group.label}</p>
+              <div className="flex flex-wrap gap-2">
+                {group.topics.map(topic => (
+                  <button
+                    key={topic}
+                    onClick={() => { setQuery(topic); void handleSearch(topic); }}
+                    className="text-xs bg-gray-100 text-gray-600 px-3 py-1.5 rounded-full hover:bg-scripture-100 hover:text-scripture-700 transition-colors"
+                  >
+                    {topic}
+                  </button>
+                ))}
+              </div>
+            </div>
+          ))}
+        </div>
+      )}
 
       {/* Results */}
       {loading && (
