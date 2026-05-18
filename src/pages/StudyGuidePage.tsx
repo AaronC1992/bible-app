@@ -1,5 +1,6 @@
 import { useState } from 'react';
 import { BIBLE_PEOPLE, type BiblePerson } from '../data/studyPeople';
+import VerseLink from '../components/bible/VerseLink';
 
 // ─── How-to-study sections ────────────────────────────────────────────────────
 const SECTIONS = [
@@ -108,12 +109,11 @@ function PersonDetail({ person }: { person: BiblePerson }) {
         <h2 className="font-serif font-semibold text-gray-800 text-base mb-2">Key Verses</h2>
         <div className="flex flex-wrap gap-2">
           {person.keyVerses.map(v => (
-            <span
+            <VerseLink
               key={v}
-              className="bg-scripture-50 border border-scripture-200 text-scripture-700 text-xs px-2.5 py-1 rounded-full font-medium"
-            >
-              {v}
-            </span>
+              reference={v}
+              className="bg-scripture-50 border border-scripture-200 text-scripture-700 text-xs px-2.5 py-1 rounded-full font-medium hover:bg-scripture-100 hover:border-scripture-400 transition-colors cursor-pointer"
+            />
           ))}
         </div>
       </section>

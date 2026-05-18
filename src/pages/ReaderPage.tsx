@@ -1,4 +1,4 @@
-import { useEffect, useState } from 'react';
+import { useEffect, useRef, useState } from 'react';
 import { useSearchParams } from 'react-router-dom';
 import { useBibleReader } from '../hooks/useBibleReader';
 import { getTranslations } from '../services/bibleApi';
@@ -13,6 +13,8 @@ export default function ReaderPage() {
   const [searchParams] = useSearchParams();
   const [translations, setTranslations] = useState<BibleTranslation[]>([]);
   const [panelOpen, setPanelOpen] = useState(false);
+  // Verse to scroll to on initial load (from URL param); cleared after first use
+  const targetVerseRef = useRef<string | null>(searchParams.get('verse'));
 
   const {
     translationId, setTranslationId,
@@ -31,16 +33,27 @@ export default function ReaderPage() {
   useEffect(() => {
     const book = searchParams.get('book') ?? bookId;
     const ch = parseInt(searchParams.get('chapter') ?? String(chapterNumber), 10);
-    const verse = searchParams.get('verse');
     setBookId(book);
     setChapterNumber(ch);
-    void loadChapter(translationId, book, ch).then(() => {
-      if (verse) {
-        // Verse highlighting handled in BibleChapterView after load
-      }
-    });
+    void loadChapter(translationId, book, ch);
   // eslint-disable-next-line react-hooks/exhaustive-deps
   }, []);
+
+  // Scroll to and highlight the target verse once chapter data has loaded
+  useEffect(() => {
+    if (!chapter || !targetVerseRef.current) return;
+    const verseNum = targetVerseRef.current;
+    targetVerseRef.current = null; // only fire once
+    const verseObj = chapter.verses.find(v => String(v.verse) === verseNum);
+    if (verseObj) {
+      setSelectedVerse(verseObj);
+      setPanelOpen(true);
+      setTimeout(() => {
+        document.getElementById(`verse-${verseNum}`)?.scrollIntoView({ behavior: 'smooth', block: 'center' });
+      }, 50);
+    }
+  // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, [chapter]);
 
   const handleGo = () => {
     void loadChapter(translationId, bookId, chapterNumber);

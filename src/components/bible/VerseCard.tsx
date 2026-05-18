@@ -14,6 +14,7 @@ export default function VerseCard({ verse, isSelected, onClick }: VerseCardProps
 
   return (
     <p
+      id={`verse-${verse.verse}`}
       onClick={() => onClick(verse)}
       className={`group cursor-pointer rounded px-2 py-1 leading-relaxed transition-colors ${
         isSelected
