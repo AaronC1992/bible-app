@@ -1,5 +1,9 @@
 # Context Bible
 
+**[🔗 Live App](https://aaronc1992.github.io/bible-app/)**
+
+---
+
 > A React + TypeScript Bible study app powered by the free [bible.helloao.org](https://bible.helloao.org) API — no API key required.
 
 ## Run the App
