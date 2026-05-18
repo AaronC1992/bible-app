@@ -3,6 +3,7 @@ import { BIBLE_PEOPLE, type BiblePerson } from '../data/studyPeople';
 import { BIBLE_PLACES, type BiblePlace } from '../data/studyPlaces';
 import { BIBLE_CONTROVERSIES, type BibleControversy } from '../data/studyControversies';
 import { CHRISTIAN_DEBATES, type ChristianDebate } from '../data/studyDebates';
+import { BIBLE_SUBJECTS, type BibleSubject } from '../data/studySubjects';
 import { PEOPLE_SOURCES, PLACES_SOURCES, CONTROVERSY_SOURCES, DEBATE_SOURCES } from '../data/studySources';
 import VerseLink from '../components/bible/VerseLink';
 
@@ -450,6 +451,47 @@ function WelcomeContent() {
   );
 }
 
+function SubjectDetail({ subject }: { subject: BibleSubject }) {
+  return (
+    <article className="space-y-6">
+      <div className="border-b border-gray-200 pb-4">
+        <h1 className="font-serif text-2xl font-bold text-scripture-800 mb-1">{subject.name}</h1>
+        <span className="text-xs bg-scripture-100 text-scripture-700 px-2 py-0.5 rounded-full font-medium">Biblical Subject</span>
+      </div>
+
+      <section>
+        <h2 className="font-serif font-semibold text-gray-800 text-base mb-2">Overview</h2>
+        <p className="text-gray-600 leading-relaxed text-sm">{subject.summary}</p>
+      </section>
+
+      <section>
+        <h2 className="font-serif font-semibold text-gray-800 text-base mb-2">Key Verses</h2>
+        <div className="flex flex-wrap gap-2">
+          {subject.keyVerses.map(v => (
+            <VerseLink
+              key={v}
+              reference={v}
+              className="bg-scripture-50 border border-scripture-200 text-scripture-700 text-xs px-2.5 py-1 rounded-full font-medium hover:bg-scripture-100 hover:border-scripture-400 transition-colors cursor-pointer"
+            />
+          ))}
+        </div>
+      </section>
+
+      <section>
+        <h2 className="font-serif font-semibold text-gray-800 text-base mb-2">Key Points</h2>
+        <ul className="space-y-2">
+          {subject.keyPoints.map((point, i) => (
+            <li key={i} className="flex gap-3 text-sm text-gray-600 leading-relaxed">
+              <span className="mt-1.5 w-1.5 h-1.5 rounded-full bg-scripture-400 shrink-0" />
+              <span>{point}</span>
+            </li>
+          ))}
+        </ul>
+      </section>
+    </article>
+  );
+}
+
 // ─── Main page ────────────────────────────────────────────────────────────────
 type ContentType =
   | { kind: 'welcome' }
@@ -457,7 +499,8 @@ type ContentType =
   | { kind: 'person'; person: BiblePerson }
   | { kind: 'place'; place: BiblePlace }
   | { kind: 'controversy'; controversy: BibleControversy }
-  | { kind: 'debate'; debate: ChristianDebate };
+  | { kind: 'debate'; debate: ChristianDebate }
+  | { kind: 'subject'; subject: BibleSubject };
 
 export default function StudyGuidePage() {
   const [openCategories, setOpenCategories] = useState<Record<string, boolean>>({});
@@ -507,12 +550,17 @@ export default function StudyGuidePage() {
       )
     : CHRISTIAN_DEBATES;
 
+  const filteredSubjects = search.trim()
+    ? BIBLE_SUBJECTS.filter(s => s.name.toLowerCase().includes(search.toLowerCase()))
+    : BIBLE_SUBJECTS;
+
   const filteredOT = filterPeople(otPeople);
   const filteredNT = filterPeople(ntPeople);
   const selectedPersonId = content.kind === 'person' ? content.person.id : null;
   const selectedPlaceId = content.kind === 'place' ? content.place.id : null;
   const selectedControversyId = content.kind === 'controversy' ? content.controversy.id : null;
   const selectedDebateId = content.kind === 'debate' ? content.debate.id : null;
+  const selectedSubjectId = content.kind === 'subject' ? content.subject.id : null;
 
   return (
     <div className="flex h-[calc(100vh-56px)] overflow-hidden">
@@ -700,6 +748,42 @@ export default function StudyGuidePage() {
             )}
           </div>
 
+          {/* Subjects category */}
+          <div className="mt-1">
+            <button
+              onClick={() => toggleCategory('subjects')}
+              className="w-full flex items-center justify-between px-3 py-2 text-xs font-semibold uppercase tracking-wider text-gray-500 hover:bg-gray-100"
+            >
+              <span>Subjects</span>
+              <svg
+                className={`w-3.5 h-3.5 transition-transform ${openCategories.subjects ? 'rotate-90' : ''}`}
+                fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth={2.5}
+              >
+                <path strokeLinecap="round" strokeLinejoin="round" d="M9 5l7 7-7 7" />
+              </svg>
+            </button>
+
+            {openCategories.subjects && (
+              <div className="pb-1">
+                {filteredSubjects.length > 0 ? filteredSubjects.map(s => (
+                  <button
+                    key={s.id}
+                    onClick={() => selectContent({ kind: 'subject', subject: s })}
+                    className={`w-full text-left px-4 py-1.5 text-sm rounded transition-colors ${
+                      selectedSubjectId === s.id
+                        ? 'bg-scripture-100 text-scripture-800 font-medium'
+                        : 'text-gray-700 hover:bg-gray-100'
+                    }`}
+                  >
+                    {s.name}
+                  </button>
+                )) : (
+                  <p className="px-4 py-2 text-xs text-gray-400 italic">No results</p>
+                )}
+              </div>
+            )}
+          </div>
+
           {/* How-to category */}
           <div className="mt-1">
             <button
@@ -730,6 +814,7 @@ export default function StudyGuidePage() {
           {content.kind === 'place' && <PlaceDetail place={content.place} />}
           {content.kind === 'controversy' && <ControversyDetail controversy={content.controversy} />}
           {content.kind === 'debate' && <DebateDetail debate={content.debate} />}
+          {content.kind === 'subject' && <SubjectDetail subject={content.subject} />}
         </div>
       </main>
     </div>
