@@ -1,4 +1,4 @@
-import { BrowserRouter, Routes, Route } from 'react-router-dom';
+import { HashRouter, Routes, Route } from 'react-router-dom';
 import AppLayout from './components/layout/AppLayout';
 import HomePage from './pages/HomePage';
 import ReaderPage from './pages/ReaderPage';
@@ -10,7 +10,7 @@ import StudyGuidePage from './pages/StudyGuidePage';
 
 export default function App() {
   return (
-    <BrowserRouter>
+    <HashRouter>
       <AppLayout>
         <Routes>
           <Route path="/" element={<HomePage />} />
@@ -22,6 +22,6 @@ export default function App() {
           <Route path="/study-guide" element={<StudyGuidePage />} />
         </Routes>
       </AppLayout>
-    </BrowserRouter>
+    </HashRouter>
   );
 }
