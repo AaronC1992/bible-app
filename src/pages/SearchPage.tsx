@@ -71,38 +71,83 @@ export default function SearchPage() {
       {/* Popular topics — shown only before any search */}
       {!searched && (
         <div className="space-y-4">
-          {[
+          {([
             {
               label: 'Popular Verses',
-              topics: ['John 3:16', 'Psalm 23', 'Romans 8:28', 'Isaiah 53:5', 'Genesis 1:1', 'Jeremiah 29:11', 'Philippians 4:13', 'Proverbs 3:5–6'],
+              topics: [
+                { label: 'John 3:16', query: 'John 3:16' },
+                { label: 'Psalm 23', query: 'Psalm 23' },
+                { label: 'Romans 8:28', query: 'Romans 8:28' },
+                { label: 'Isaiah 53:5', query: 'Isaiah 53:5' },
+                { label: 'Genesis 1:1', query: 'Genesis 1:1' },
+                { label: 'Jeremiah 29:11', query: 'Jeremiah 29:11' },
+                { label: 'Philippians 4:13', query: 'Philippians 4:13' },
+                { label: 'Proverbs 3:5', query: 'Proverbs 3:5' },
+              ],
             },
             {
               label: 'Faith & Salvation',
-              topics: ['grace', 'faith', 'salvation', 'forgiveness', 'repentance', 'eternal life', 'baptism', 'born again'],
+              topics: [
+                { label: 'faith', query: 'Hebrews 11:1' },
+                { label: 'grace', query: 'Ephesians 2:8' },
+                { label: 'salvation', query: 'Romans 10:9' },
+                { label: 'forgiveness', query: 'Psalm 103:12' },
+                { label: 'repentance', query: 'Acts 3:19' },
+                { label: 'eternal life', query: 'John 3:16' },
+                { label: 'baptism', query: 'Romans 6:4' },
+                { label: 'born again', query: 'John 3:3' },
+              ],
             },
             {
               label: 'Comfort & Strength',
-              topics: ['peace', 'hope', 'comfort', 'strength', 'fear not', 'rest', 'healing', 'trust'],
+              topics: [
+                { label: 'peace', query: 'John 14:27' },
+                { label: 'hope', query: 'Romans 15:13' },
+                { label: 'comfort', query: 'Psalm 46:1' },
+                { label: 'strength', query: 'Philippians 4:13' },
+                { label: 'fear not', query: 'Isaiah 41:10' },
+                { label: 'rest', query: 'Matthew 11:28' },
+                { label: 'healing', query: 'Isaiah 53:5' },
+                { label: 'trust', query: 'Proverbs 3:5' },
+              ],
             },
             {
               label: 'Love & Character',
-              topics: ['love', 'joy', 'humility', 'patience', 'kindness', 'mercy', 'wisdom', 'righteousness'],
+              topics: [
+                { label: 'love', query: '1 Corinthians 13:4' },
+                { label: 'joy', query: 'Nehemiah 8:10' },
+                { label: 'humility', query: 'Philippians 2:3' },
+                { label: 'patience', query: 'James 1:3' },
+                { label: 'kindness', query: 'Micah 6:8' },
+                { label: 'mercy', query: 'Lamentations 3:22' },
+                { label: 'wisdom', query: 'James 1:5' },
+                { label: 'righteousness', query: 'Matthew 6:33' },
+              ],
             },
             {
               label: 'Prayer & Worship',
-              topics: ['prayer', 'praise', 'Holy Spirit', 'worship', 'thanksgiving', 'fasting', 'covenant', 'resurrection'],
+              topics: [
+                { label: 'prayer', query: 'Matthew 6:9' },
+                { label: 'Holy Spirit', query: 'Acts 1:8' },
+                { label: 'resurrection', query: 'John 11:25' },
+                { label: 'covenant', query: 'Genesis 9:13' },
+                { label: 'praise', query: 'Psalm 150:1' },
+                { label: 'worship', query: 'John 4:24' },
+                { label: 'thanksgiving', query: 'Psalm 100:4' },
+                { label: 'fasting', query: 'Matthew 6:16' },
+              ],
             },
-          ].map(group => (
+          ] as { label: string; topics: { label: string; query: string }[] }[]).map(group => (
             <div key={group.label}>
               <p className="text-xs font-semibold text-gray-400 uppercase tracking-wider mb-2">{group.label}</p>
               <div className="flex flex-wrap gap-2">
-                {group.topics.map(topic => (
+                {group.topics.map(({ label, query }) => (
                   <button
-                    key={topic}
-                    onClick={() => { setQuery(topic); void handleSearch(topic); }}
+                    key={label}
+                    onClick={() => { setQuery(query); void handleSearch(query); }}
                     className="text-xs bg-gray-100 text-gray-600 px-3 py-1.5 rounded-full hover:bg-scripture-100 hover:text-scripture-700 transition-colors"
                   >
-                    {topic}
+                    {label}
                   </button>
                 ))}
               </div>
