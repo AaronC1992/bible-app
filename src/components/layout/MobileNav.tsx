@@ -7,6 +7,7 @@ const MOBILE_NAV = [
   { to: '/reading-plan', label: 'Plan', icon: '📅' },
   { to: '/study-guide', label: 'Study', icon: '✦' },
   { to: '/notes', label: 'Notes', icon: '✏' },
+  { to: '/feedback', label: 'Suggest', icon: '💬' },
 ];
 
 export default function MobileNav() {

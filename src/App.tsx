@@ -7,6 +7,7 @@ import FavoritesPage from './pages/FavoritesPage';
 import NotesPage from './pages/NotesPage';
 import ReadingPlanPage from './pages/ReadingPlanPage';
 import StudyGuidePage from './pages/StudyGuidePage';
+import FeedbackPage from './pages/FeedbackPage';
 
 export default function App() {
   return (
@@ -20,6 +21,7 @@ export default function App() {
           <Route path="/notes" element={<NotesPage />} />
           <Route path="/reading-plan" element={<ReadingPlanPage />} />
           <Route path="/study-guide" element={<StudyGuidePage />} />
+          <Route path="/feedback" element={<FeedbackPage />} />
         </Routes>
       </AppLayout>
     </HashRouter>

@@ -8,6 +8,7 @@ const NAV_LINKS = [
   { to: '/notes', label: 'Notes' },
   { to: '/reading-plan', label: 'Reading Plan' },
   { to: '/study-guide', label: 'Study Guide' },
+  { to: '/feedback', label: 'Suggest' },
 ];
 
 export default function Header() {
