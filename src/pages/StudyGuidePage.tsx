@@ -1,6 +1,8 @@
 import { useState } from 'react';
 import { BIBLE_PEOPLE, type BiblePerson } from '../data/studyPeople';
 import { BIBLE_PLACES, type BiblePlace } from '../data/studyPlaces';
+import { BIBLE_CONTROVERSIES, type BibleControversy } from '../data/studyControversies';
+import { CHRISTIAN_DEBATES, type ChristianDebate } from '../data/studyDebates';
 import VerseLink from '../components/bible/VerseLink';
 
 // ─── How-to-study sections ────────────────────────────────────────────────────
@@ -181,6 +183,131 @@ function PlaceDetail({ place }: { place: BiblePlace }) {
   );
 }
 
+function ControversyDetail({ controversy }: { controversy: BibleControversy }) {
+  return (
+    <article className="space-y-6">
+      <div className="border-b border-gray-200 pb-4">
+        <h1 className="font-serif text-2xl font-bold text-scripture-800 mb-1">{controversy.title}</h1>
+        <span className="text-xs bg-amber-100 text-amber-700 px-2 py-0.5 rounded-full font-medium">{controversy.era}</span>
+      </div>
+
+      <section>
+        <h2 className="font-serif font-semibold text-gray-800 text-base mb-2">Background</h2>
+        <p className="text-gray-600 leading-relaxed text-sm">{controversy.background}</p>
+      </section>
+
+      <section>
+        <h2 className="font-serif font-semibold text-gray-800 text-base mb-3">Major Positions</h2>
+        <div className="space-y-3">
+          {controversy.positions.map((pos, i) => (
+            <div key={i} className="bg-parchment-50 border border-parchment-200 rounded-xl p-4">
+              <p className="font-semibold text-scripture-800 text-sm mb-1">{pos.label}</p>
+              <p className="text-gray-600 text-sm leading-relaxed">{pos.summary}</p>
+            </div>
+          ))}
+        </div>
+      </section>
+
+      <section>
+        <h2 className="font-serif font-semibold text-gray-800 text-base mb-2">Key Verses</h2>
+        <div className="flex flex-wrap gap-2">
+          {controversy.keyVerses.map(v => (
+            <VerseLink
+              key={v}
+              reference={v}
+              className="bg-scripture-50 border border-scripture-200 text-scripture-700 text-xs px-2.5 py-1 rounded-full font-medium hover:bg-scripture-100 hover:border-scripture-400 transition-colors cursor-pointer"
+            />
+          ))}
+        </div>
+      </section>
+
+      <section>
+        <h2 className="font-serif font-semibold text-gray-800 text-base mb-2">Key Facts</h2>
+        <ul className="space-y-2">
+          {controversy.keyFacts.map((fact, i) => (
+            <li key={i} className="flex gap-3 text-sm text-gray-600 leading-relaxed">
+              <span className="mt-1.5 w-1.5 h-1.5 rounded-full bg-amber-400 shrink-0" />
+              <span>{fact}</span>
+            </li>
+          ))}
+        </ul>
+      </section>
+    </article>
+  );
+}
+
+function DebateDetail({ debate }: { debate: ChristianDebate }) {
+  const categoryColors: Record<ChristianDebate['category'], string> = {
+    Historical: 'bg-blue-100 text-blue-700',
+    Theological: 'bg-scripture-100 text-scripture-700',
+    Scientific: 'bg-green-100 text-green-700',
+    Philosophical: 'bg-purple-100 text-purple-700',
+  };
+
+  return (
+    <article className="space-y-6">
+      <div className="border-b border-gray-200 pb-4">
+        <h1 className="font-serif text-2xl font-bold text-scripture-800 mb-1">{debate.title}</h1>
+        <span className={`text-xs px-2 py-0.5 rounded-full font-medium ${categoryColors[debate.category]}`}>{debate.category}</span>
+      </div>
+
+      <section>
+        <h2 className="font-serif font-semibold text-gray-800 text-base mb-2">Overview</h2>
+        <p className="text-gray-600 leading-relaxed text-sm">{debate.overview}</p>
+      </section>
+
+      <section>
+        <h2 className="font-serif font-semibold text-gray-800 text-base mb-2">The Challenge</h2>
+        <div className="bg-red-50 border border-red-200 rounded-xl p-4 space-y-2">
+          {debate.challenges.map((c, i) => (
+            <div key={i} className="flex gap-3 text-sm text-gray-700 leading-relaxed">
+              <span className="mt-1.5 w-1.5 h-1.5 rounded-full bg-red-400 shrink-0" />
+              <span>{c}</span>
+            </div>
+          ))}
+        </div>
+      </section>
+
+      <section>
+        <h2 className="font-serif font-semibold text-gray-800 text-base mb-2">Christian Responses</h2>
+        <div className="bg-scripture-50 border border-scripture-200 rounded-xl p-4 space-y-2">
+          {debate.responses.map((r, i) => (
+            <div key={i} className="flex gap-3 text-sm text-gray-700 leading-relaxed">
+              <span className="mt-1.5 w-1.5 h-1.5 rounded-full bg-scripture-400 shrink-0" />
+              <span>{r}</span>
+            </div>
+          ))}
+        </div>
+      </section>
+
+      <section>
+        <h2 className="font-serif font-semibold text-gray-800 text-base mb-2">Key Verses</h2>
+        <div className="flex flex-wrap gap-2">
+          {debate.keyVerses.map(v => (
+            <VerseLink
+              key={v}
+              reference={v}
+              className="bg-scripture-50 border border-scripture-200 text-scripture-700 text-xs px-2.5 py-1 rounded-full font-medium hover:bg-scripture-100 hover:border-scripture-400 transition-colors cursor-pointer"
+            />
+          ))}
+        </div>
+      </section>
+
+      <section>
+        <h2 className="font-serif font-semibold text-gray-800 text-base mb-2">Key Points</h2>
+        <ul className="space-y-2">
+          {debate.keyPoints.map((point, i) => (
+            <li key={i} className="flex gap-3 text-sm text-gray-600 leading-relaxed">
+              <span className="mt-1.5 w-1.5 h-1.5 rounded-full bg-scripture-400 shrink-0" />
+              <span>{point}</span>
+            </li>
+          ))}
+        </ul>
+      </section>
+    </article>
+  );
+}
+
 function HowToContent() {
   return (
     <div className="space-y-6">
@@ -239,7 +366,9 @@ type ContentType =
   | { kind: 'welcome' }
   | { kind: 'how-to' }
   | { kind: 'person'; person: BiblePerson }
-  | { kind: 'place'; place: BiblePlace };
+  | { kind: 'place'; place: BiblePlace }
+  | { kind: 'controversy'; controversy: BibleControversy }
+  | { kind: 'debate'; debate: ChristianDebate };
 
 export default function StudyGuidePage() {
   const [openCategories, setOpenCategories] = useState<Record<string, boolean>>({ people: true });
@@ -276,10 +405,25 @@ export default function StudyGuidePage() {
       )
     : BIBLE_PLACES;
 
+  const filteredControversies = search.trim()
+    ? BIBLE_CONTROVERSIES.filter(c =>
+        c.title.toLowerCase().includes(search.toLowerCase())
+      )
+    : BIBLE_CONTROVERSIES;
+
+  const filteredDebates = search.trim()
+    ? CHRISTIAN_DEBATES.filter(d =>
+        d.title.toLowerCase().includes(search.toLowerCase()) ||
+        d.category.toLowerCase().includes(search.toLowerCase())
+      )
+    : CHRISTIAN_DEBATES;
+
   const filteredOT = filterPeople(otPeople);
   const filteredNT = filterPeople(ntPeople);
   const selectedPersonId = content.kind === 'person' ? content.person.id : null;
   const selectedPlaceId = content.kind === 'place' ? content.place.id : null;
+  const selectedControversyId = content.kind === 'controversy' ? content.controversy.id : null;
+  const selectedDebateId = content.kind === 'debate' ? content.debate.id : null;
 
   return (
     <div className="flex h-[calc(100vh-56px)] overflow-hidden">
@@ -395,6 +539,78 @@ export default function StudyGuidePage() {
             )}
           </div>
 
+          {/* Controversies category */}
+          <div className="mt-1">
+            <button
+              onClick={() => toggleCategory('controversies')}
+              className="w-full flex items-center justify-between px-3 py-2 text-xs font-semibold uppercase tracking-wider text-gray-500 hover:bg-gray-100"
+            >
+              <span>Controversies</span>
+              <svg
+                className={`w-3.5 h-3.5 transition-transform ${openCategories.controversies ? 'rotate-90' : ''}`}
+                fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth={2.5}
+              >
+                <path strokeLinecap="round" strokeLinejoin="round" d="M9 5l7 7-7 7" />
+              </svg>
+            </button>
+
+            {openCategories.controversies && (
+              <div className="pb-1">
+                {filteredControversies.length > 0 ? filteredControversies.map(c => (
+                  <button
+                    key={c.id}
+                    onClick={() => selectContent({ kind: 'controversy', controversy: c })}
+                    className={`w-full text-left px-4 py-1.5 text-sm rounded transition-colors ${
+                      selectedControversyId === c.id
+                        ? 'bg-scripture-100 text-scripture-800 font-medium'
+                        : 'text-gray-700 hover:bg-gray-100'
+                    }`}
+                  >
+                    {c.title}
+                  </button>
+                )) : (
+                  <p className="px-4 py-2 text-xs text-gray-400 italic">No results</p>
+                )}
+              </div>
+            )}
+          </div>
+
+          {/* Debates category */}
+          <div className="mt-1">
+            <button
+              onClick={() => toggleCategory('debates')}
+              className="w-full flex items-center justify-between px-3 py-2 text-xs font-semibold uppercase tracking-wider text-gray-500 hover:bg-gray-100"
+            >
+              <span>Debates</span>
+              <svg
+                className={`w-3.5 h-3.5 transition-transform ${openCategories.debates ? 'rotate-90' : ''}`}
+                fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth={2.5}
+              >
+                <path strokeLinecap="round" strokeLinejoin="round" d="M9 5l7 7-7 7" />
+              </svg>
+            </button>
+
+            {openCategories.debates && (
+              <div className="pb-1">
+                {filteredDebates.length > 0 ? filteredDebates.map(d => (
+                  <button
+                    key={d.id}
+                    onClick={() => selectContent({ kind: 'debate', debate: d })}
+                    className={`w-full text-left px-4 py-1.5 text-sm rounded transition-colors ${
+                      selectedDebateId === d.id
+                        ? 'bg-scripture-100 text-scripture-800 font-medium'
+                        : 'text-gray-700 hover:bg-gray-100'
+                    }`}
+                  >
+                    {d.title}
+                  </button>
+                )) : (
+                  <p className="px-4 py-2 text-xs text-gray-400 italic">No results</p>
+                )}
+              </div>
+            )}
+          </div>
+
           {/* How-to category */}
           <div className="mt-1">
             <button
@@ -423,6 +639,8 @@ export default function StudyGuidePage() {
           {content.kind === 'how-to' && <HowToContent />}
           {content.kind === 'person' && <PersonDetail person={content.person} />}
           {content.kind === 'place' && <PlaceDetail place={content.place} />}
+          {content.kind === 'controversy' && <ControversyDetail controversy={content.controversy} />}
+          {content.kind === 'debate' && <DebateDetail debate={content.debate} />}
         </div>
       </main>
     </div>
