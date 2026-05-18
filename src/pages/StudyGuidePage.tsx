@@ -460,7 +460,7 @@ type ContentType =
   | { kind: 'debate'; debate: ChristianDebate };
 
 export default function StudyGuidePage() {
-  const [openCategories, setOpenCategories] = useState<Record<string, boolean>>({ people: true });
+  const [openCategories, setOpenCategories] = useState<Record<string, boolean>>({});
   const [content, setContent] = useState<ContentType>({ kind: 'welcome' });
   const [search, setSearch] = useState('');
   // On mobile, track whether to show sidebar or content panel
