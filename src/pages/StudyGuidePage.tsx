@@ -196,9 +196,16 @@ export default function StudyGuidePage() {
   const [openCategories, setOpenCategories] = useState<Record<string, boolean>>({ people: true });
   const [content, setContent] = useState<ContentType>({ kind: 'welcome' });
   const [search, setSearch] = useState('');
+  // On mobile, track whether to show sidebar or content panel
+  const [mobileShowContent, setMobileShowContent] = useState(false);
 
   const toggleCategory = (id: string) => {
     setOpenCategories(prev => ({ ...prev, [id]: !prev[id] }));
+  };
+
+  const selectContent = (c: ContentType) => {
+    setContent(c);
+    setMobileShowContent(true);
   };
 
   const otPeople = BIBLE_PEOPLE.filter(p => p.testament === 'OT' || p.testament === 'Both');
@@ -220,8 +227,8 @@ export default function StudyGuidePage() {
   return (
     <div className="flex h-[calc(100vh-56px)] overflow-hidden">
 
-      {/* Sidebar */}
-      <aside className="w-64 shrink-0 border-r border-gray-200 bg-gray-50 flex flex-col overflow-hidden">
+      {/* Sidebar — full-width on mobile when content is not shown */}
+      <aside className={`${mobileShowContent ? 'hidden' : 'flex'} md:flex w-full md:w-64 shrink-0 border-r border-gray-200 bg-gray-50 flex-col overflow-hidden`}>
         <div className="p-3 border-b border-gray-200">
           <input
             type="text"
@@ -256,7 +263,7 @@ export default function StudyGuidePage() {
                     {filteredOT.map(person => (
                       <button
                         key={person.id}
-                        onClick={() => setContent({ kind: 'person', person })}
+                        onClick={() => selectContent({ kind: 'person', person })}
                         className={`w-full text-left px-4 py-1.5 text-sm rounded transition-colors ${
                           selectedPersonId === person.id
                             ? 'bg-scripture-100 text-scripture-800 font-medium'
@@ -275,7 +282,7 @@ export default function StudyGuidePage() {
                     {filteredNT.map(person => (
                       <button
                         key={person.id}
-                        onClick={() => setContent({ kind: 'person', person })}
+                        onClick={() => selectContent({ kind: 'person', person })}
                         className={`w-full text-left px-4 py-1.5 text-sm rounded transition-colors ${
                           selectedPersonId === person.id
                             ? 'bg-scripture-100 text-scripture-800 font-medium'
@@ -298,7 +305,7 @@ export default function StudyGuidePage() {
           {/* How-to category */}
           <div className="mt-1">
             <button
-              onClick={() => setContent({ kind: 'how-to' })}
+              onClick={() => selectContent({ kind: 'how-to' })}
               className={`w-full flex items-center px-3 py-2 text-xs font-semibold uppercase tracking-wider hover:bg-gray-100 ${
                 content.kind === 'how-to' ? 'text-scripture-700 bg-scripture-50' : 'text-gray-500'
               }`}
@@ -309,11 +316,20 @@ export default function StudyGuidePage() {
         </nav>
       </aside>
 
-      {/* Main content */}
-      <main className="flex-1 overflow-y-auto px-6 py-6">
-        {content.kind === 'welcome' && <WelcomeContent />}
-        {content.kind === 'how-to' && <HowToContent />}
-        {content.kind === 'person' && <PersonDetail person={content.person} />}
+      {/* Main content — hidden on mobile until something is selected */}
+      <main className={`${mobileShowContent ? 'flex' : 'hidden'} md:flex flex-1 flex-col overflow-y-auto`}>
+        {/* Mobile back button */}
+        <button
+          onClick={() => setMobileShowContent(false)}
+          className="md:hidden flex items-center gap-1.5 px-4 py-2.5 text-sm text-scripture-600 font-medium border-b border-gray-200 bg-white shrink-0"
+        >
+          ← Back to topics
+        </button>
+        <div className="flex-1 overflow-y-auto px-4 py-4 md:px-6 md:py-6">
+          {content.kind === 'welcome' && <WelcomeContent />}
+          {content.kind === 'how-to' && <HowToContent />}
+          {content.kind === 'person' && <PersonDetail person={content.person} />}
+        </div>
       </main>
     </div>
   );

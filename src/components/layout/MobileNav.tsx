@@ -4,7 +4,8 @@ const MOBILE_NAV = [
   { to: '/', label: 'Home', icon: '⌂' },
   { to: '/reader', label: 'Read', icon: '📖' },
   { to: '/search', label: 'Search', icon: '🔍' },
-  { to: '/favorites', label: 'Saves', icon: '♡' },
+  { to: '/reading-plan', label: 'Plan', icon: '📅' },
+  { to: '/study-guide', label: 'Study', icon: '✦' },
   { to: '/notes', label: 'Notes', icon: '✏' },
 ];
 
