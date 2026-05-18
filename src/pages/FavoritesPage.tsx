@@ -13,12 +13,12 @@ export default function FavoritesPage() {
   }, []);
 
   const handleRemove = (fav: FavoriteVerse) => {
-    removeFavorite(fav.verseRef);
+    removeFavorite(fav.reference);
     setFavorites(getFavorites());
   };
 
   const handleOpen = (fav: FavoriteVerse) => {
-    navigate(`/reader?book=${fav.verseRef.bookId}&chapter=${fav.verseRef.chapter}&verse=${fav.verseRef.verse}`);
+    navigate(`/reader?book=${fav.reference.bookId}&chapter=${fav.reference.chapter}&verse=${fav.reference.verse}`);
   };
 
   return (
@@ -48,7 +48,7 @@ export default function FavoritesPage() {
               onClick={() => handleOpen(fav)}
               className="font-medium text-scripture-700 text-sm hover:text-scripture-900"
             >
-              {fav.reference}
+              {fav.verseRef}
             </button>
             <button
               onClick={() => handleRemove(fav)}
