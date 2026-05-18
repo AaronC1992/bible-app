@@ -1,5 +1,6 @@
 import { useState } from 'react';
 import { BIBLE_PEOPLE, type BiblePerson } from '../data/studyPeople';
+import { BIBLE_PLACES, type BiblePlace } from '../data/studyPlaces';
 import VerseLink from '../components/bible/VerseLink';
 
 // ─── How-to-study sections ────────────────────────────────────────────────────
@@ -133,6 +134,53 @@ function PersonDetail({ person }: { person: BiblePerson }) {
   );
 }
 
+function PlaceDetail({ place }: { place: BiblePlace }) {
+  return (
+    <article className="space-y-6">
+      <div className="border-b border-gray-200 pb-4">
+        <h1 className="font-serif text-2xl font-bold text-scripture-800 mb-1">{place.name}</h1>
+        <div className="flex flex-wrap gap-2 text-xs">
+          <span className="bg-scripture-100 text-scripture-700 px-2 py-0.5 rounded-full font-medium">
+            {place.testament === 'Both' ? 'OT & NT' : place.testament}
+          </span>
+          <span className="bg-parchment-100 text-gray-600 px-2 py-0.5 rounded-full">{place.type}</span>
+          <span className="bg-gray-100 text-gray-500 px-2 py-0.5 rounded-full">{place.modernLocation}</span>
+        </div>
+      </div>
+
+      <section>
+        <h2 className="font-serif font-semibold text-gray-800 text-base mb-2">Overview</h2>
+        <p className="text-gray-600 leading-relaxed text-sm">{place.description}</p>
+      </section>
+
+      <section>
+        <h2 className="font-serif font-semibold text-gray-800 text-base mb-2">Key Verses</h2>
+        <div className="flex flex-wrap gap-2">
+          {place.keyVerses.map(v => (
+            <VerseLink
+              key={v}
+              reference={v}
+              className="bg-scripture-50 border border-scripture-200 text-scripture-700 text-xs px-2.5 py-1 rounded-full font-medium hover:bg-scripture-100 hover:border-scripture-400 transition-colors cursor-pointer"
+            />
+          ))}
+        </div>
+      </section>
+
+      <section>
+        <h2 className="font-serif font-semibold text-gray-800 text-base mb-2">Key Facts</h2>
+        <ul className="space-y-2">
+          {place.keyFacts.map((fact, i) => (
+            <li key={i} className="flex gap-3 text-sm text-gray-600 leading-relaxed">
+              <span className="mt-1.5 w-1.5 h-1.5 rounded-full bg-scripture-400 shrink-0" />
+              <span>{fact}</span>
+            </li>
+          ))}
+        </ul>
+      </section>
+    </article>
+  );
+}
+
 function HowToContent() {
   return (
     <div className="space-y-6">
@@ -180,7 +228,7 @@ function WelcomeContent() {
       </div>
       <p className="font-serif text-lg text-gray-500">Select a topic from the sidebar to begin studying.</p>
       <p className="text-sm max-w-sm">
-        Browse people of the Bible, study methods, and more resources from the categories on the left.
+        Browse people of the Bible, places of the Bible, study methods, and more resources from the categories on the left.
       </p>
     </div>
   );
@@ -190,7 +238,8 @@ function WelcomeContent() {
 type ContentType =
   | { kind: 'welcome' }
   | { kind: 'how-to' }
-  | { kind: 'person'; person: BiblePerson };
+  | { kind: 'person'; person: BiblePerson }
+  | { kind: 'place'; place: BiblePlace };
 
 export default function StudyGuidePage() {
   const [openCategories, setOpenCategories] = useState<Record<string, boolean>>({ people: true });
@@ -220,9 +269,17 @@ export default function StudyGuidePage() {
     );
   };
 
+  const filteredPlaces = search.trim()
+    ? BIBLE_PLACES.filter(pl =>
+        pl.name.toLowerCase().includes(search.toLowerCase()) ||
+        pl.type.toLowerCase().includes(search.toLowerCase())
+      )
+    : BIBLE_PLACES;
+
   const filteredOT = filterPeople(otPeople);
   const filteredNT = filterPeople(ntPeople);
   const selectedPersonId = content.kind === 'person' ? content.person.id : null;
+  const selectedPlaceId = content.kind === 'place' ? content.place.id : null;
 
   return (
     <div className="flex h-[calc(100vh-56px)] overflow-hidden">
@@ -234,7 +291,7 @@ export default function StudyGuidePage() {
             type="text"
             value={search}
             onChange={e => setSearch(e.target.value)}
-            placeholder="Search people…"
+            placeholder="Search people & places…"
             className="w-full text-sm rounded-lg border border-gray-300 px-3 py-1.5 focus:outline-none focus:ring-2 focus:ring-scripture-400 bg-white"
           />
         </div>
@@ -302,6 +359,42 @@ export default function StudyGuidePage() {
             )}
           </div>
 
+          {/* Places category */}
+          <div className="mt-1">
+            <button
+              onClick={() => toggleCategory('places')}
+              className="w-full flex items-center justify-between px-3 py-2 text-xs font-semibold uppercase tracking-wider text-gray-500 hover:bg-gray-100"
+            >
+              <span>Places of the Bible</span>
+              <svg
+                className={`w-3.5 h-3.5 transition-transform ${openCategories.places ? 'rotate-90' : ''}`}
+                fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth={2.5}
+              >
+                <path strokeLinecap="round" strokeLinejoin="round" d="M9 5l7 7-7 7" />
+              </svg>
+            </button>
+
+            {openCategories.places && (
+              <div className="pb-1">
+                {filteredPlaces.length > 0 ? filteredPlaces.map(place => (
+                  <button
+                    key={place.id}
+                    onClick={() => selectContent({ kind: 'place', place })}
+                    className={`w-full text-left px-4 py-1.5 text-sm rounded transition-colors ${
+                      selectedPlaceId === place.id
+                        ? 'bg-scripture-100 text-scripture-800 font-medium'
+                        : 'text-gray-700 hover:bg-gray-100'
+                    }`}
+                  >
+                    {place.name}
+                  </button>
+                )) : (
+                  <p className="px-4 py-2 text-xs text-gray-400 italic">No results</p>
+                )}
+              </div>
+            )}
+          </div>
+
           {/* How-to category */}
           <div className="mt-1">
             <button
@@ -329,6 +422,7 @@ export default function StudyGuidePage() {
           {content.kind === 'welcome' && <WelcomeContent />}
           {content.kind === 'how-to' && <HowToContent />}
           {content.kind === 'person' && <PersonDetail person={content.person} />}
+          {content.kind === 'place' && <PlaceDetail place={content.place} />}
         </div>
       </main>
     </div>
