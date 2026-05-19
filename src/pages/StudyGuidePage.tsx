@@ -4,6 +4,7 @@ import { BIBLE_PLACES, type BiblePlace } from '../data/studyPlaces';
 import { BIBLE_CONTROVERSIES, type BibleControversy } from '../data/studyControversies';
 import { CHRISTIAN_DEBATES, type ChristianDebate } from '../data/studyDebates';
 import { BIBLE_SUBJECTS, type BibleSubject } from '../data/studySubjects';
+import { BIBLE_TIMELINE, type TimelineEntry } from '../data/studyTimeline';
 import { PEOPLE_SOURCES, PLACES_SOURCES, CONTROVERSY_SOURCES, DEBATE_SOURCES } from '../data/studySources';
 import VerseLink from '../components/bible/VerseLink';
 
@@ -95,40 +96,40 @@ function PersonDetail({ person }: { person: BiblePerson }) {
   const sources = PEOPLE_SOURCES[person.id] ?? [];
   return (
     <article className="space-y-6">
-      <div className="border-b border-gray-200 pb-4">
-        <h1 className="font-serif text-2xl font-bold text-scripture-800 mb-1">{person.name}</h1>
+      <div className="border-b border-gray-200 dark:border-gray-700 pb-4">
+        <h1 className="font-serif text-2xl font-bold text-scripture-800 dark:text-scripture-100 mb-1">{person.name}</h1>
         <div className="flex flex-wrap gap-2 text-xs">
-          <span className="bg-scripture-100 text-scripture-700 px-2 py-0.5 rounded-full font-medium">
+          <span className="bg-scripture-100 dark:bg-scripture-900/40 text-scripture-700 dark:text-scripture-200 px-2 py-0.5 rounded-full font-medium">
             {person.testament === 'Both' ? 'OT & NT' : person.testament}
           </span>
-          <span className="bg-parchment-100 text-gray-600 px-2 py-0.5 rounded-full">{person.role}</span>
-          <span className="bg-gray-100 text-gray-500 px-2 py-0.5 rounded-full">{person.livedEra}</span>
+          <span className="bg-parchment-100 dark:bg-gray-700 text-gray-600 dark:text-gray-300 px-2 py-0.5 rounded-full">{person.role}</span>
+          <span className="bg-gray-100 dark:bg-gray-700 text-gray-500 dark:text-gray-400 px-2 py-0.5 rounded-full">{person.livedEra}</span>
         </div>
       </div>
 
       <section>
-        <h2 className="font-serif font-semibold text-gray-800 text-base mb-2">Biography</h2>
-        <p className="text-gray-600 leading-relaxed text-sm">{person.bio}</p>
+        <h2 className="font-serif font-semibold text-gray-800 dark:text-gray-100 text-base mb-2">Biography</h2>
+        <p className="text-gray-600 dark:text-gray-300 leading-relaxed text-sm">{person.bio}</p>
       </section>
 
       <section>
-        <h2 className="font-serif font-semibold text-gray-800 text-base mb-2">Key Verses</h2>
+        <h2 className="font-serif font-semibold text-gray-800 dark:text-gray-100 text-base mb-2">Key Verses</h2>
         <div className="flex flex-wrap gap-2">
           {person.keyVerses.map(v => (
             <VerseLink
               key={v}
               reference={v}
-              className="bg-scripture-50 border border-scripture-200 text-scripture-700 text-xs px-2.5 py-1 rounded-full font-medium hover:bg-scripture-100 hover:border-scripture-400 transition-colors cursor-pointer"
+              className="bg-scripture-50 dark:bg-scripture-900/30 border border-scripture-200 dark:border-scripture-700 text-scripture-700 dark:text-scripture-300 text-xs px-2.5 py-1 rounded-full font-medium hover:bg-scripture-100 dark:hover:bg-scripture-900/50 hover:border-scripture-400 transition-colors cursor-pointer"
             />
           ))}
         </div>
       </section>
 
       <section>
-        <h2 className="font-serif font-semibold text-gray-800 text-base mb-2">Key Facts</h2>
+        <h2 className="font-serif font-semibold text-gray-800 dark:text-gray-100 text-base mb-2">Key Facts</h2>
         <ul className="space-y-2">
           {person.keyFacts.map((fact, i) => (
-            <li key={i} className="flex gap-3 text-sm text-gray-600 leading-relaxed">
+            <li key={i} className="flex gap-3 text-sm text-gray-600 dark:text-gray-300 leading-relaxed">
               <span className="mt-1.5 w-1.5 h-1.5 rounded-full bg-scripture-400 shrink-0" />
               <span>{fact}</span>
             </li>
@@ -138,7 +139,7 @@ function PersonDetail({ person }: { person: BiblePerson }) {
 
       {sources.length > 0 && (
         <section>
-          <h2 className="font-serif font-semibold text-gray-800 text-base mb-2">Sources &amp; Further Reading</h2>
+          <h2 className="font-serif font-semibold text-gray-800 dark:text-gray-100 text-base mb-2">Sources &amp; Further Reading</h2>
           <ul className="space-y-1.5">
             {sources.map((src, i) => (
               <li key={i}>
@@ -146,7 +147,7 @@ function PersonDetail({ person }: { person: BiblePerson }) {
                   href={src.url}
                   target="_blank"
                   rel="noopener noreferrer"
-                  className="text-sm text-scripture-600 hover:text-scripture-800 hover:underline flex items-center gap-1.5"
+                  className="text-sm text-scripture-600 dark:text-scripture-300 hover:text-scripture-800 dark:hover:text-scripture-100 hover:underline flex items-center gap-1.5"
                 >
                   <span className="text-xs opacity-70">↗</span>
                   <span>{src.label}</span>
@@ -164,40 +165,40 @@ function PlaceDetail({ place }: { place: BiblePlace }) {
   const sources = PLACES_SOURCES[place.id] ?? [];
   return (
     <article className="space-y-6">
-      <div className="border-b border-gray-200 pb-4">
-        <h1 className="font-serif text-2xl font-bold text-scripture-800 mb-1">{place.name}</h1>
+      <div className="border-b border-gray-200 dark:border-gray-700 pb-4">
+        <h1 className="font-serif text-2xl font-bold text-scripture-800 dark:text-scripture-100 mb-1">{place.name}</h1>
         <div className="flex flex-wrap gap-2 text-xs">
-          <span className="bg-scripture-100 text-scripture-700 px-2 py-0.5 rounded-full font-medium">
+          <span className="bg-scripture-100 dark:bg-scripture-900/40 text-scripture-700 dark:text-scripture-200 px-2 py-0.5 rounded-full font-medium">
             {place.testament === 'Both' ? 'OT & NT' : place.testament}
           </span>
-          <span className="bg-parchment-100 text-gray-600 px-2 py-0.5 rounded-full">{place.type}</span>
-          <span className="bg-gray-100 text-gray-500 px-2 py-0.5 rounded-full">{place.modernLocation}</span>
+          <span className="bg-parchment-100 dark:bg-gray-700 text-gray-600 dark:text-gray-300 px-2 py-0.5 rounded-full">{place.type}</span>
+          <span className="bg-gray-100 dark:bg-gray-700 text-gray-500 dark:text-gray-400 px-2 py-0.5 rounded-full">{place.modernLocation}</span>
         </div>
       </div>
 
       <section>
-        <h2 className="font-serif font-semibold text-gray-800 text-base mb-2">Overview</h2>
-        <p className="text-gray-600 leading-relaxed text-sm">{place.description}</p>
+        <h2 className="font-serif font-semibold text-gray-800 dark:text-gray-100 text-base mb-2">Overview</h2>
+        <p className="text-gray-600 dark:text-gray-300 leading-relaxed text-sm">{place.description}</p>
       </section>
 
       <section>
-        <h2 className="font-serif font-semibold text-gray-800 text-base mb-2">Key Verses</h2>
+        <h2 className="font-serif font-semibold text-gray-800 dark:text-gray-100 text-base mb-2">Key Verses</h2>
         <div className="flex flex-wrap gap-2">
           {place.keyVerses.map(v => (
             <VerseLink
               key={v}
               reference={v}
-              className="bg-scripture-50 border border-scripture-200 text-scripture-700 text-xs px-2.5 py-1 rounded-full font-medium hover:bg-scripture-100 hover:border-scripture-400 transition-colors cursor-pointer"
+              className="bg-scripture-50 dark:bg-scripture-900/30 border border-scripture-200 dark:border-scripture-700 text-scripture-700 dark:text-scripture-300 text-xs px-2.5 py-1 rounded-full font-medium hover:bg-scripture-100 dark:hover:bg-scripture-900/50 hover:border-scripture-400 transition-colors cursor-pointer"
             />
           ))}
         </div>
       </section>
 
       <section>
-        <h2 className="font-serif font-semibold text-gray-800 text-base mb-2">Key Facts</h2>
+        <h2 className="font-serif font-semibold text-gray-800 dark:text-gray-100 text-base mb-2">Key Facts</h2>
         <ul className="space-y-2">
           {place.keyFacts.map((fact, i) => (
-            <li key={i} className="flex gap-3 text-sm text-gray-600 leading-relaxed">
+            <li key={i} className="flex gap-3 text-sm text-gray-600 dark:text-gray-300 leading-relaxed">
               <span className="mt-1.5 w-1.5 h-1.5 rounded-full bg-scripture-400 shrink-0" />
               <span>{fact}</span>
             </li>
@@ -207,7 +208,7 @@ function PlaceDetail({ place }: { place: BiblePlace }) {
 
       {sources.length > 0 && (
         <section>
-          <h2 className="font-serif font-semibold text-gray-800 text-base mb-2">Sources &amp; Further Reading</h2>
+          <h2 className="font-serif font-semibold text-gray-800 dark:text-gray-100 text-base mb-2">Sources &amp; Further Reading</h2>
           <ul className="space-y-1.5">
             {sources.map((src, i) => (
               <li key={i}>
@@ -215,7 +216,7 @@ function PlaceDetail({ place }: { place: BiblePlace }) {
                   href={src.url}
                   target="_blank"
                   rel="noopener noreferrer"
-                  className="text-sm text-scripture-600 hover:text-scripture-800 hover:underline flex items-center gap-1.5"
+                  className="text-sm text-scripture-600 dark:text-scripture-300 hover:text-scripture-800 dark:hover:text-scripture-100 hover:underline flex items-center gap-1.5"
                 >
                   <span className="text-xs opacity-70">↗</span>
                   <span>{src.label}</span>
@@ -233,46 +234,46 @@ function ControversyDetail({ controversy }: { controversy: BibleControversy }) {
   const sources = CONTROVERSY_SOURCES[controversy.id] ?? [];
   return (
     <article className="space-y-6">
-      <div className="border-b border-gray-200 pb-4">
-        <h1 className="font-serif text-2xl font-bold text-scripture-800 mb-1">{controversy.title}</h1>
-        <span className="text-xs bg-amber-100 text-amber-700 px-2 py-0.5 rounded-full font-medium">{controversy.era}</span>
+      <div className="border-b border-gray-200 dark:border-gray-700 pb-4">
+        <h1 className="font-serif text-2xl font-bold text-scripture-800 dark:text-scripture-100 mb-1">{controversy.title}</h1>
+        <span className="text-xs bg-amber-100 dark:bg-amber-900/40 text-amber-700 dark:text-amber-200 px-2 py-0.5 rounded-full font-medium">{controversy.era}</span>
       </div>
 
       <section>
-        <h2 className="font-serif font-semibold text-gray-800 text-base mb-2">Background</h2>
-        <p className="text-gray-600 leading-relaxed text-sm">{controversy.background}</p>
+        <h2 className="font-serif font-semibold text-gray-800 dark:text-gray-100 text-base mb-2">Background</h2>
+        <p className="text-gray-600 dark:text-gray-300 leading-relaxed text-sm">{controversy.background}</p>
       </section>
 
       <section>
-        <h2 className="font-serif font-semibold text-gray-800 text-base mb-3">Major Positions</h2>
+        <h2 className="font-serif font-semibold text-gray-800 dark:text-gray-100 text-base mb-3">Major Positions</h2>
         <div className="space-y-3">
           {controversy.positions.map((pos, i) => (
-            <div key={i} className="bg-parchment-50 border border-parchment-200 rounded-xl p-4">
-              <p className="font-semibold text-scripture-800 text-sm mb-1">{pos.label}</p>
-              <p className="text-gray-600 text-sm leading-relaxed">{pos.summary}</p>
+            <div key={i} className="bg-parchment-50 dark:bg-gray-700/50 border border-parchment-200 dark:border-gray-600 rounded-xl p-4">
+              <p className="font-semibold text-scripture-800 dark:text-scripture-100 text-sm mb-1">{pos.label}</p>
+              <p className="text-gray-600 dark:text-gray-300 text-sm leading-relaxed">{pos.summary}</p>
             </div>
           ))}
         </div>
       </section>
 
       <section>
-        <h2 className="font-serif font-semibold text-gray-800 text-base mb-2">Key Verses</h2>
+        <h2 className="font-serif font-semibold text-gray-800 dark:text-gray-100 text-base mb-2">Key Verses</h2>
         <div className="flex flex-wrap gap-2">
           {controversy.keyVerses.map(v => (
             <VerseLink
               key={v}
               reference={v}
-              className="bg-scripture-50 border border-scripture-200 text-scripture-700 text-xs px-2.5 py-1 rounded-full font-medium hover:bg-scripture-100 hover:border-scripture-400 transition-colors cursor-pointer"
+              className="bg-scripture-50 dark:bg-scripture-900/30 border border-scripture-200 dark:border-scripture-700 text-scripture-700 dark:text-scripture-300 text-xs px-2.5 py-1 rounded-full font-medium hover:bg-scripture-100 dark:hover:bg-scripture-900/50 hover:border-scripture-400 transition-colors cursor-pointer"
             />
           ))}
         </div>
       </section>
 
       <section>
-        <h2 className="font-serif font-semibold text-gray-800 text-base mb-2">Key Facts</h2>
+        <h2 className="font-serif font-semibold text-gray-800 dark:text-gray-100 text-base mb-2">Key Facts</h2>
         <ul className="space-y-2">
           {controversy.keyFacts.map((fact, i) => (
-            <li key={i} className="flex gap-3 text-sm text-gray-600 leading-relaxed">
+            <li key={i} className="flex gap-3 text-sm text-gray-600 dark:text-gray-300 leading-relaxed">
               <span className="mt-1.5 w-1.5 h-1.5 rounded-full bg-amber-400 shrink-0" />
               <span>{fact}</span>
             </li>
@@ -282,7 +283,7 @@ function ControversyDetail({ controversy }: { controversy: BibleControversy }) {
 
       {sources.length > 0 && (
         <section>
-          <h2 className="font-serif font-semibold text-gray-800 text-base mb-2">Sources &amp; Further Reading</h2>
+          <h2 className="font-serif font-semibold text-gray-800 dark:text-gray-100 text-base mb-2">Sources &amp; Further Reading</h2>
           <ul className="space-y-1.5">
             {sources.map((src, i) => (
               <li key={i}>
@@ -307,29 +308,29 @@ function ControversyDetail({ controversy }: { controversy: BibleControversy }) {
 function DebateDetail({ debate }: { debate: ChristianDebate }) {
   const sources = DEBATE_SOURCES[debate.id] ?? [];
   const categoryColors: Record<ChristianDebate['category'], string> = {
-    Historical: 'bg-blue-100 text-blue-700',
-    Theological: 'bg-scripture-100 text-scripture-700',
-    Scientific: 'bg-green-100 text-green-700',
-    Philosophical: 'bg-purple-100 text-purple-700',
+    Historical: 'bg-blue-100 dark:bg-blue-900/40 text-blue-700 dark:text-blue-200',
+    Theological: 'bg-scripture-100 dark:bg-scripture-900/40 text-scripture-700 dark:text-scripture-200',
+    Scientific: 'bg-green-100 dark:bg-green-900/40 text-green-700 dark:text-green-200',
+    Philosophical: 'bg-purple-100 dark:bg-purple-900/40 text-purple-700 dark:text-purple-200',
   };
 
   return (
     <article className="space-y-6">
-      <div className="border-b border-gray-200 pb-4">
-        <h1 className="font-serif text-2xl font-bold text-scripture-800 mb-1">{debate.title}</h1>
+      <div className="border-b border-gray-200 dark:border-gray-700 pb-4">
+        <h1 className="font-serif text-2xl font-bold text-scripture-800 dark:text-scripture-100 mb-1">{debate.title}</h1>
         <span className={`text-xs px-2 py-0.5 rounded-full font-medium ${categoryColors[debate.category]}`}>{debate.category}</span>
       </div>
 
       <section>
-        <h2 className="font-serif font-semibold text-gray-800 text-base mb-2">Overview</h2>
-        <p className="text-gray-600 leading-relaxed text-sm">{debate.overview}</p>
+        <h2 className="font-serif font-semibold text-gray-800 dark:text-gray-100 text-base mb-2">Overview</h2>
+        <p className="text-gray-600 dark:text-gray-300 leading-relaxed text-sm">{debate.overview}</p>
       </section>
 
       <section>
-        <h2 className="font-serif font-semibold text-gray-800 text-base mb-2">The Challenge</h2>
-        <div className="bg-red-50 border border-red-200 rounded-xl p-4 space-y-2">
+        <h2 className="font-serif font-semibold text-gray-800 dark:text-gray-100 text-base mb-2">The Challenge</h2>
+        <div className="bg-red-50 dark:bg-red-900/20 border border-red-200 dark:border-red-800 rounded-xl p-4 space-y-2">
           {debate.challenges.map((c, i) => (
-            <div key={i} className="flex gap-3 text-sm text-gray-700 leading-relaxed">
+            <div key={i} className="flex gap-3 text-sm text-gray-700 dark:text-gray-300 leading-relaxed">
               <span className="mt-1.5 w-1.5 h-1.5 rounded-full bg-red-400 shrink-0" />
               <span>{c}</span>
             </div>
@@ -338,10 +339,10 @@ function DebateDetail({ debate }: { debate: ChristianDebate }) {
       </section>
 
       <section>
-        <h2 className="font-serif font-semibold text-gray-800 text-base mb-2">Christian Responses</h2>
-        <div className="bg-scripture-50 border border-scripture-200 rounded-xl p-4 space-y-2">
+        <h2 className="font-serif font-semibold text-gray-800 dark:text-gray-100 text-base mb-2">Christian Responses</h2>
+        <div className="bg-scripture-50 dark:bg-gray-700/50 border border-scripture-200 dark:border-scripture-700 rounded-xl p-4 space-y-2">
           {debate.responses.map((r, i) => (
-            <div key={i} className="flex gap-3 text-sm text-gray-700 leading-relaxed">
+            <div key={i} className="flex gap-3 text-sm text-gray-700 dark:text-gray-300 leading-relaxed">
               <span className="mt-1.5 w-1.5 h-1.5 rounded-full bg-scripture-400 shrink-0" />
               <span>{r}</span>
             </div>
@@ -350,23 +351,23 @@ function DebateDetail({ debate }: { debate: ChristianDebate }) {
       </section>
 
       <section>
-        <h2 className="font-serif font-semibold text-gray-800 text-base mb-2">Key Verses</h2>
+        <h2 className="font-serif font-semibold text-gray-800 dark:text-gray-100 text-base mb-2">Key Verses</h2>
         <div className="flex flex-wrap gap-2">
           {debate.keyVerses.map(v => (
             <VerseLink
               key={v}
               reference={v}
-              className="bg-scripture-50 border border-scripture-200 text-scripture-700 text-xs px-2.5 py-1 rounded-full font-medium hover:bg-scripture-100 hover:border-scripture-400 transition-colors cursor-pointer"
+              className="bg-scripture-50 dark:bg-scripture-900/30 border border-scripture-200 dark:border-scripture-700 text-scripture-700 dark:text-scripture-300 text-xs px-2.5 py-1 rounded-full font-medium hover:bg-scripture-100 dark:hover:bg-scripture-900/50 hover:border-scripture-400 transition-colors cursor-pointer"
             />
           ))}
         </div>
       </section>
 
       <section>
-        <h2 className="font-serif font-semibold text-gray-800 text-base mb-2">Key Points</h2>
+        <h2 className="font-serif font-semibold text-gray-800 dark:text-gray-100 text-base mb-2">Key Points</h2>
         <ul className="space-y-2">
           {debate.keyPoints.map((point, i) => (
-            <li key={i} className="flex gap-3 text-sm text-gray-600 leading-relaxed">
+            <li key={i} className="flex gap-3 text-sm text-gray-600 dark:text-gray-300 leading-relaxed">
               <span className="mt-1.5 w-1.5 h-1.5 rounded-full bg-scripture-400 shrink-0" />
               <span>{point}</span>
             </li>
@@ -384,7 +385,7 @@ function DebateDetail({ debate }: { debate: ChristianDebate }) {
                   href={src.url}
                   target="_blank"
                   rel="noopener noreferrer"
-                  className="text-sm text-scripture-600 hover:text-scripture-800 hover:underline flex items-center gap-1.5"
+                  className="text-sm text-scripture-600 dark:text-scripture-300 hover:text-scripture-800 dark:hover:text-scripture-100 hover:underline flex items-center gap-1.5"
                 >
                   <span className="text-xs opacity-70">↗</span>
                   <span>{src.label}</span>
@@ -402,17 +403,17 @@ function HowToContent() {
   return (
     <div className="space-y-6">
       <div>
-        <h1 className="font-serif text-2xl font-bold text-scripture-800 mb-2">
+        <h1 className="font-serif text-2xl font-bold text-scripture-800 dark:text-scripture-100 mb-2">
           How to Study the Bible in Context
         </h1>
-        <p className="text-gray-600 text-sm leading-relaxed">
+        <p className="text-gray-600 dark:text-gray-300 text-sm leading-relaxed">
           The Bible is not a book of fortune cookie verses. It is an ancient library of literature — narrative,
           poetry, prophecy, letters, law, and wisdom — written across 1,500 years by dozens of authors in
           multiple languages and cultures. Reading it well requires reading it carefully.
         </p>
       </div>
 
-      <div className="bg-scripture-50 border border-scripture-200 rounded-xl p-4 text-scripture-800 text-sm">
+      <div className="bg-scripture-50 dark:bg-scripture-900/30 border border-scripture-200 dark:border-scripture-700 rounded-xl p-4 text-scripture-800 dark:text-scripture-100 text-sm">
         <strong>The most common mistake in Bible reading</strong> is treating every verse as a standalone
         inspirational quote. Scripture's power comes from its larger story, not from any single sentence
         removed from its setting.
@@ -420,14 +421,14 @@ function HowToContent() {
 
       <div className="space-y-4">
         {SECTIONS.map(section => (
-          <section key={section.num} className="bg-white border border-gray-200 rounded-xl p-4">
+          <section key={section.num} className="bg-white dark:bg-gray-700 border border-gray-200 dark:border-gray-600 rounded-xl p-4">
             <div className="flex items-start gap-3 mb-2">
-              <div className="flex items-center justify-center w-7 h-7 rounded-full bg-scripture-100 text-scripture-700 font-bold text-xs shrink-0">
+              <div className="flex items-center justify-center w-7 h-7 rounded-full bg-scripture-100 dark:bg-scripture-900/40 text-scripture-700 dark:text-scripture-300 font-bold text-xs shrink-0">
                 {section.num}
               </div>
-              <h2 className="font-serif font-semibold text-gray-800">{section.title}</h2>
+              <h2 className="font-serif font-semibold text-gray-800 dark:text-gray-100">{section.title}</h2>
             </div>
-            <p className="text-gray-600 leading-relaxed text-sm pl-10">{section.content}</p>
+            <p className="text-gray-600 dark:text-gray-300 leading-relaxed text-sm pl-10">{section.content}</p>
           </section>
         ))}
       </div>
@@ -437,13 +438,13 @@ function HowToContent() {
 
 function WelcomeContent() {
   return (
-    <div className="flex flex-col items-center justify-center h-full text-center py-20 space-y-4 text-gray-400">
-      <div className="w-16 h-16 rounded-full bg-scripture-100 flex items-center justify-center">
-        <svg className="w-8 h-8 text-scripture-400" fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth={1.5}>
+    <div className="flex flex-col items-center justify-center h-full text-center py-20 space-y-4 text-gray-400 dark:text-gray-500">
+      <div className="w-16 h-16 rounded-full bg-scripture-100 dark:bg-scripture-900/40 flex items-center justify-center">
+        <svg className="w-8 h-8 text-scripture-400 dark:text-scripture-300" fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth={1.5}>
           <path strokeLinecap="round" strokeLinejoin="round" d="M12 6.042A8.967 8.967 0 006 3.75c-1.052 0-2.062.18-3 .512v14.25A8.987 8.987 0 016 18c2.305 0 4.408.867 6 2.292m0-14.25a8.966 8.966 0 016-2.292c1.052 0 2.062.18 3 .512v14.25A8.987 8.987 0 0018 18a8.967 8.967 0 00-6 2.292m0-14.25v14.25" />
         </svg>
       </div>
-      <p className="font-serif text-lg text-gray-500">Select a topic from the sidebar to begin studying.</p>
+      <p className="font-serif text-lg text-gray-500 dark:text-gray-400">Select a topic from the sidebar to begin studying.</p>
       <p className="text-sm max-w-sm">
         Browse people of the Bible, places of the Bible, study methods, and more resources from the categories on the left.
       </p>
@@ -454,34 +455,34 @@ function WelcomeContent() {
 function SubjectDetail({ subject }: { subject: BibleSubject }) {
   return (
     <article className="space-y-6">
-      <div className="border-b border-gray-200 pb-4">
-        <h1 className="font-serif text-2xl font-bold text-scripture-800 mb-1">{subject.name}</h1>
-        <span className="text-xs bg-scripture-100 text-scripture-700 px-2 py-0.5 rounded-full font-medium">Biblical Subject</span>
+      <div className="border-b border-gray-200 dark:border-gray-700 pb-4">
+        <h1 className="font-serif text-2xl font-bold text-scripture-800 dark:text-scripture-100 mb-1">{subject.name}</h1>
+        <span className="text-xs bg-scripture-100 dark:bg-scripture-900/40 text-scripture-700 dark:text-scripture-200 px-2 py-0.5 rounded-full font-medium">Biblical Subject</span>
       </div>
 
       <section>
-        <h2 className="font-serif font-semibold text-gray-800 text-base mb-2">Overview</h2>
-        <p className="text-gray-600 leading-relaxed text-sm">{subject.summary}</p>
+        <h2 className="font-serif font-semibold text-gray-800 dark:text-gray-100 text-base mb-2">Overview</h2>
+        <p className="text-gray-600 dark:text-gray-300 leading-relaxed text-sm">{subject.summary}</p>
       </section>
 
       <section>
-        <h2 className="font-serif font-semibold text-gray-800 text-base mb-2">Key Verses</h2>
+        <h2 className="font-serif font-semibold text-gray-800 dark:text-gray-100 text-base mb-2">Key Verses</h2>
         <div className="flex flex-wrap gap-2">
           {subject.keyVerses.map(v => (
             <VerseLink
               key={v}
               reference={v}
-              className="bg-scripture-50 border border-scripture-200 text-scripture-700 text-xs px-2.5 py-1 rounded-full font-medium hover:bg-scripture-100 hover:border-scripture-400 transition-colors cursor-pointer"
+              className="bg-scripture-50 dark:bg-scripture-900/30 border border-scripture-200 dark:border-scripture-700 text-scripture-700 dark:text-scripture-300 text-xs px-2.5 py-1 rounded-full font-medium hover:bg-scripture-100 dark:hover:bg-scripture-900/50 hover:border-scripture-400 transition-colors cursor-pointer"
             />
           ))}
         </div>
       </section>
 
       <section>
-        <h2 className="font-serif font-semibold text-gray-800 text-base mb-2">Key Points</h2>
+        <h2 className="font-serif font-semibold text-gray-800 dark:text-gray-100 text-base mb-2">Key Points</h2>
         <ul className="space-y-2">
           {subject.keyPoints.map((point, i) => (
-            <li key={i} className="flex gap-3 text-sm text-gray-600 leading-relaxed">
+            <li key={i} className="flex gap-3 text-sm text-gray-600 dark:text-gray-300 leading-relaxed">
               <span className="mt-1.5 w-1.5 h-1.5 rounded-full bg-scripture-400 shrink-0" />
               <span>{point}</span>
             </li>
@@ -492,10 +493,88 @@ function SubjectDetail({ subject }: { subject: BibleSubject }) {
   );
 }
 
+// ─── Timeline ─────────────────────────────────────────────────────────────────
+const ERA_COLORS: Record<string, string> = {
+  'Primeval History': 'bg-amber-100 text-amber-800 dark:bg-amber-900/40 dark:text-amber-200',
+  'Patriarchs': 'bg-orange-100 text-orange-800 dark:bg-orange-900/40 dark:text-orange-200',
+  'The Exodus': 'bg-blue-100 text-blue-800 dark:bg-blue-900/40 dark:text-blue-200',
+  'Conquest & Settlement': 'bg-green-100 text-green-800 dark:bg-green-900/40 dark:text-green-200',
+  'United Monarchy': 'bg-purple-100 text-purple-800 dark:bg-purple-900/40 dark:text-purple-200',
+  'Divided Kingdom': 'bg-red-100 text-red-800 dark:bg-red-900/40 dark:text-red-200',
+  'Exile': 'bg-gray-200 text-gray-700 dark:bg-gray-700 dark:text-gray-300',
+  'Return & Restoration': 'bg-teal-100 text-teal-800 dark:bg-teal-900/40 dark:text-teal-200',
+  'Intertestamental Period': 'bg-gray-100 text-gray-600 dark:bg-gray-700 dark:text-gray-400',
+  'Life of Christ': 'bg-scripture-100 text-scripture-800 dark:bg-scripture-900/40 dark:text-scripture-200',
+  'Early Church': 'bg-indigo-100 text-indigo-800 dark:bg-indigo-900/40 dark:text-indigo-200',
+};
+
+function TimelineContent() {
+  const eras = BIBLE_TIMELINE.reduce<Record<string, TimelineEntry[]>>((acc, entry) => {
+    if (!acc[entry.era]) acc[entry.era] = [];
+    acc[entry.era].push(entry);
+    return acc;
+  }, {});
+
+  return (
+    <div className="space-y-8">
+      <div>
+        <h1 className="font-serif text-2xl font-bold text-scripture-800 dark:text-scripture-100 mb-2">
+          Biblical Timeline
+        </h1>
+        <p className="text-gray-600 dark:text-gray-300 text-sm leading-relaxed">
+          A chronological overview of major events from Creation through the early Church — showing God's
+          unfolding plan of redemption across all of Scripture.
+        </p>
+      </div>
+
+      {Object.entries(eras).map(([era, entries]) => (
+        <section key={era}>
+          <div className="flex items-center gap-3 mb-4">
+            <span
+              className={`text-xs font-bold uppercase tracking-wider px-2.5 py-1 rounded-full shrink-0 ${
+                ERA_COLORS[era] ?? 'bg-gray-100 text-gray-600 dark:bg-gray-700 dark:text-gray-300'
+              }`}
+            >
+              {era}
+            </span>
+            <div className="flex-1 h-px bg-gray-200 dark:bg-gray-700" />
+          </div>
+
+          <div className="space-y-3 pl-4 border-l-2 border-gray-200 dark:border-gray-700 ml-2">
+            {entries.map(entry => (
+              <div key={entry.id} className="relative pl-4">
+                <span className="absolute -left-[1.45rem] top-3 w-3 h-3 rounded-full bg-scripture-400 dark:bg-scripture-500 border-2 border-white dark:border-gray-900" />
+                <div className="bg-white dark:bg-gray-800 border border-gray-200 dark:border-gray-700 rounded-xl p-4">
+                  <div className="flex items-start justify-between gap-2 mb-1.5">
+                    <h3 className="font-serif font-semibold text-gray-800 dark:text-gray-100 text-sm leading-snug">
+                      {entry.title}
+                    </h3>
+                    <span className="text-xs text-gray-400 dark:text-gray-500 shrink-0 font-medium whitespace-nowrap">
+                      {entry.date}
+                    </span>
+                  </div>
+                  <p className="text-gray-600 dark:text-gray-300 text-xs leading-relaxed mb-2">
+                    {entry.description}
+                  </p>
+                  <VerseLink
+                    reference={entry.keyVerse}
+                    className="text-xs text-scripture-600 dark:text-scripture-300 hover:text-scripture-800 dark:hover:text-scripture-100 font-medium"
+                  />
+                </div>
+              </div>
+            ))}
+          </div>
+        </section>
+      ))}
+    </div>
+  );
+}
+
 // ─── Main page ────────────────────────────────────────────────────────────────
 type ContentType =
   | { kind: 'welcome' }
   | { kind: 'how-to' }
+  | { kind: 'timeline' }
   | { kind: 'person'; person: BiblePerson }
   | { kind: 'place'; place: BiblePlace }
   | { kind: 'controversy'; controversy: BibleControversy }
@@ -563,17 +642,17 @@ export default function StudyGuidePage() {
   const selectedSubjectId = content.kind === 'subject' ? content.subject.id : null;
 
   return (
-    <div className="flex h-[calc(100vh-56px)] overflow-hidden">
+    <div className="flex h-[calc(100vh-56px)] overflow-hidden bg-parchment-50 dark:bg-gray-900">
 
       {/* Sidebar — full-width on mobile when content is not shown */}
-      <aside className={`${mobileShowContent ? 'hidden' : 'flex'} md:flex w-full md:w-64 shrink-0 border-r border-gray-200 bg-gray-50 flex-col overflow-hidden`}>
-        <div className="p-3 border-b border-gray-200">
+      <aside className={`${mobileShowContent ? 'hidden' : 'flex'} md:flex w-full md:w-64 shrink-0 border-r border-gray-200 dark:border-gray-700 bg-gray-50 dark:bg-gray-800 flex-col overflow-hidden`}>
+        <div className="p-3 border-b border-gray-200 dark:border-gray-700">
           <input
             type="text"
             value={search}
             onChange={e => setSearch(e.target.value)}
             placeholder="Search people & places…"
-            className="w-full text-sm rounded-lg border border-gray-300 px-3 py-1.5 focus:outline-none focus:ring-2 focus:ring-scripture-400 bg-white"
+            className="w-full text-sm rounded-lg border border-gray-300 dark:border-gray-600 dark:bg-gray-700 dark:text-gray-100 dark:placeholder-gray-400 px-3 py-1.5 focus:outline-none focus:ring-2 focus:ring-scripture-400 bg-white"
           />
         </div>
 
@@ -582,7 +661,7 @@ export default function StudyGuidePage() {
           <div>
             <button
               onClick={() => toggleCategory('people')}
-              className="w-full flex items-center justify-between px-3 py-2 text-xs font-semibold uppercase tracking-wider text-gray-500 hover:bg-gray-100"
+              className="w-full flex items-center justify-between px-3 py-2 text-xs font-semibold uppercase tracking-wider text-gray-500 dark:text-gray-400 hover:bg-gray-100 dark:hover:bg-gray-700"
             >
               <span>People of the Bible</span>
               <svg
@@ -597,15 +676,15 @@ export default function StudyGuidePage() {
               <div className="pb-1">
                 {filteredOT.length > 0 && (
                   <>
-                    <p className="px-4 pt-2 pb-1 text-xs text-gray-400 font-medium">Old Testament</p>
+                    <p className="px-4 pt-2 pb-1 text-xs text-gray-400 dark:text-gray-500 font-medium">Old Testament</p>
                     {filteredOT.map(person => (
                       <button
                         key={person.id}
                         onClick={() => selectContent({ kind: 'person', person })}
                         className={`w-full text-left px-4 py-1.5 text-sm rounded transition-colors ${
                           selectedPersonId === person.id
-                            ? 'bg-scripture-100 text-scripture-800 font-medium'
-                            : 'text-gray-700 hover:bg-gray-100'
+                            ? 'bg-scripture-100 dark:bg-scripture-900/40 text-scripture-800 dark:text-scripture-100 font-medium'
+                            : 'text-gray-700 dark:text-gray-300 hover:bg-gray-100 dark:hover:bg-gray-700'
                         }`}
                       >
                         {person.name}
@@ -616,15 +695,15 @@ export default function StudyGuidePage() {
 
                 {filteredNT.length > 0 && (
                   <>
-                    <p className="px-4 pt-3 pb-1 text-xs text-gray-400 font-medium">New Testament</p>
+                    <p className="px-4 pt-3 pb-1 text-xs text-gray-400 dark:text-gray-500 font-medium">New Testament</p>
                     {filteredNT.map(person => (
                       <button
                         key={person.id}
                         onClick={() => selectContent({ kind: 'person', person })}
                         className={`w-full text-left px-4 py-1.5 text-sm rounded transition-colors ${
                           selectedPersonId === person.id
-                            ? 'bg-scripture-100 text-scripture-800 font-medium'
-                            : 'text-gray-700 hover:bg-gray-100'
+                            ? 'bg-scripture-100 dark:bg-scripture-900/40 text-scripture-800 dark:text-scripture-100 font-medium'
+                            : 'text-gray-700 dark:text-gray-300 hover:bg-gray-100 dark:hover:bg-gray-700'
                         }`}
                       >
                         {person.name}
@@ -644,7 +723,7 @@ export default function StudyGuidePage() {
           <div className="mt-1">
             <button
               onClick={() => toggleCategory('places')}
-              className="w-full flex items-center justify-between px-3 py-2 text-xs font-semibold uppercase tracking-wider text-gray-500 hover:bg-gray-100"
+              className="w-full flex items-center justify-between px-3 py-2 text-xs font-semibold uppercase tracking-wider text-gray-500 dark:text-gray-400 hover:bg-gray-100 dark:hover:bg-gray-700"
             >
               <span>Places of the Bible</span>
               <svg
@@ -663,8 +742,8 @@ export default function StudyGuidePage() {
                     onClick={() => selectContent({ kind: 'place', place })}
                     className={`w-full text-left px-4 py-1.5 text-sm rounded transition-colors ${
                       selectedPlaceId === place.id
-                        ? 'bg-scripture-100 text-scripture-800 font-medium'
-                        : 'text-gray-700 hover:bg-gray-100'
+                        ? 'bg-scripture-100 dark:bg-scripture-900/40 text-scripture-800 dark:text-scripture-100 font-medium'
+                        : 'text-gray-700 dark:text-gray-300 hover:bg-gray-100 dark:hover:bg-gray-700'
                     }`}
                   >
                     {place.name}
@@ -680,7 +759,7 @@ export default function StudyGuidePage() {
           <div className="mt-1">
             <button
               onClick={() => toggleCategory('controversies')}
-              className="w-full flex items-center justify-between px-3 py-2 text-xs font-semibold uppercase tracking-wider text-gray-500 hover:bg-gray-100"
+              className="w-full flex items-center justify-between px-3 py-2 text-xs font-semibold uppercase tracking-wider text-gray-500 dark:text-gray-400 hover:bg-gray-100 dark:hover:bg-gray-700"
             >
               <span>Controversies</span>
               <svg
@@ -699,8 +778,8 @@ export default function StudyGuidePage() {
                     onClick={() => selectContent({ kind: 'controversy', controversy: c })}
                     className={`w-full text-left px-4 py-1.5 text-sm rounded transition-colors ${
                       selectedControversyId === c.id
-                        ? 'bg-scripture-100 text-scripture-800 font-medium'
-                        : 'text-gray-700 hover:bg-gray-100'
+                        ? 'bg-scripture-100 dark:bg-scripture-900/40 text-scripture-800 dark:text-scripture-100 font-medium'
+                        : 'text-gray-700 dark:text-gray-300 hover:bg-gray-100 dark:hover:bg-gray-700'
                     }`}
                   >
                     {c.title}
@@ -716,7 +795,7 @@ export default function StudyGuidePage() {
           <div className="mt-1">
             <button
               onClick={() => toggleCategory('debates')}
-              className="w-full flex items-center justify-between px-3 py-2 text-xs font-semibold uppercase tracking-wider text-gray-500 hover:bg-gray-100"
+              className="w-full flex items-center justify-between px-3 py-2 text-xs font-semibold uppercase tracking-wider text-gray-500 dark:text-gray-400 hover:bg-gray-100 dark:hover:bg-gray-700"
             >
               <span>Debates</span>
               <svg
@@ -735,8 +814,8 @@ export default function StudyGuidePage() {
                     onClick={() => selectContent({ kind: 'debate', debate: d })}
                     className={`w-full text-left px-4 py-1.5 text-sm rounded transition-colors ${
                       selectedDebateId === d.id
-                        ? 'bg-scripture-100 text-scripture-800 font-medium'
-                        : 'text-gray-700 hover:bg-gray-100'
+                        ? 'bg-scripture-100 dark:bg-scripture-900/40 text-scripture-800 dark:text-scripture-100 font-medium'
+                        : 'text-gray-700 dark:text-gray-300 hover:bg-gray-100 dark:hover:bg-gray-700'
                     }`}
                   >
                     {d.title}
@@ -752,7 +831,7 @@ export default function StudyGuidePage() {
           <div className="mt-1">
             <button
               onClick={() => toggleCategory('subjects')}
-              className="w-full flex items-center justify-between px-3 py-2 text-xs font-semibold uppercase tracking-wider text-gray-500 hover:bg-gray-100"
+              className="w-full flex items-center justify-between px-3 py-2 text-xs font-semibold uppercase tracking-wider text-gray-500 dark:text-gray-400 hover:bg-gray-100 dark:hover:bg-gray-700"
             >
               <span>Subjects</span>
               <svg
@@ -771,8 +850,8 @@ export default function StudyGuidePage() {
                     onClick={() => selectContent({ kind: 'subject', subject: s })}
                     className={`w-full text-left px-4 py-1.5 text-sm rounded transition-colors ${
                       selectedSubjectId === s.id
-                        ? 'bg-scripture-100 text-scripture-800 font-medium'
-                        : 'text-gray-700 hover:bg-gray-100'
+                        ? 'bg-scripture-100 dark:bg-scripture-900/40 text-scripture-800 dark:text-scripture-100 font-medium'
+                        : 'text-gray-700 dark:text-gray-300 hover:bg-gray-100 dark:hover:bg-gray-700'
                     }`}
                   >
                     {s.name}
@@ -784,12 +863,24 @@ export default function StudyGuidePage() {
             )}
           </div>
 
+          {/* Biblical Timeline category */}
+          <div className="mt-1">
+            <button
+              onClick={() => selectContent({ kind: 'timeline' })}
+              className={`w-full flex items-center px-3 py-2 text-xs font-semibold uppercase tracking-wider hover:bg-gray-100 dark:hover:bg-gray-700 ${
+                content.kind === 'timeline' ? 'text-scripture-700 dark:text-scripture-300 bg-scripture-50 dark:bg-scripture-900/30' : 'text-gray-500 dark:text-gray-400'
+              }`}
+            >
+              Biblical Timeline
+            </button>
+          </div>
+
           {/* How-to category */}
           <div className="mt-1">
             <button
               onClick={() => selectContent({ kind: 'how-to' })}
-              className={`w-full flex items-center px-3 py-2 text-xs font-semibold uppercase tracking-wider hover:bg-gray-100 ${
-                content.kind === 'how-to' ? 'text-scripture-700 bg-scripture-50' : 'text-gray-500'
+              className={`w-full flex items-center px-3 py-2 text-xs font-semibold uppercase tracking-wider hover:bg-gray-100 dark:hover:bg-gray-700 ${
+                content.kind === 'how-to' ? 'text-scripture-700 dark:text-scripture-300 bg-scripture-50 dark:bg-scripture-900/30' : 'text-gray-500 dark:text-gray-400'
               }`}
             >
               How to Study
@@ -799,17 +890,18 @@ export default function StudyGuidePage() {
       </aside>
 
       {/* Main content — hidden on mobile until something is selected */}
-      <main className={`${mobileShowContent ? 'flex' : 'hidden'} md:flex flex-1 flex-col overflow-y-auto`}>
+      <main className={`${mobileShowContent ? 'flex' : 'hidden'} md:flex flex-1 flex-col overflow-y-auto bg-parchment-50 dark:bg-gray-900`}>
         {/* Mobile back button */}
         <button
           onClick={() => setMobileShowContent(false)}
-          className="md:hidden flex items-center gap-1.5 px-4 py-2.5 text-sm text-scripture-600 font-medium border-b border-gray-200 bg-white shrink-0"
+          className="md:hidden flex items-center gap-1.5 px-4 py-2.5 text-sm text-scripture-600 dark:text-scripture-300 font-medium border-b border-gray-200 dark:border-gray-700 bg-white dark:bg-gray-800 shrink-0"
         >
           ← Back to topics
         </button>
         <div className="flex-1 overflow-y-auto px-4 py-4 md:px-6 md:py-6">
           {content.kind === 'welcome' && <WelcomeContent />}
           {content.kind === 'how-to' && <HowToContent />}
+          {content.kind === 'timeline' && <TimelineContent />}
           {content.kind === 'person' && <PersonDetail person={content.person} />}
           {content.kind === 'place' && <PlaceDetail place={content.place} />}
           {content.kind === 'controversy' && <ControversyDetail controversy={content.controversy} />}

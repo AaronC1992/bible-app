@@ -48,7 +48,7 @@ export default function FeedbackPage() {
   };
 
   return (
-    <div className="min-h-full bg-parchment-50 flex flex-col">
+    <div className="min-h-full bg-parchment-50 dark:bg-gray-900 flex flex-col">
       {/* Page header */}
       <div className="bg-scripture-800 text-white px-4 py-8 md:py-12">
         <div className="max-w-2xl mx-auto text-center">
@@ -64,10 +64,10 @@ export default function FeedbackPage() {
       <div className="flex-1 px-4 py-8 md:py-12">
         <div className="max-w-2xl mx-auto">
           {status === 'success' ? (
-            <div className="bg-white rounded-2xl shadow-sm border border-gray-200 p-8 text-center">
+            <div className="bg-white dark:bg-gray-800 rounded-2xl shadow-sm border border-gray-200 dark:border-gray-700 p-8 text-center">
               <div className="text-5xl mb-4">✅</div>
-              <h2 className="font-serif text-xl font-bold text-scripture-800 mb-2">Thank you!</h2>
-              <p className="text-gray-600 text-sm mb-6">Your suggestion has been received. I appreciate you taking the time to reach out!</p>
+              <h2 className="font-serif text-xl font-bold text-scripture-800 dark:text-scripture-100 mb-2">Thank you!</h2>
+              <p className="text-gray-600 dark:text-gray-300 text-sm mb-6">Your suggestion has been received. I appreciate you taking the time to reach out!</p>
               <button
                 onClick={() => setStatus('idle')}
                 className="px-5 py-2 bg-scripture-700 text-white text-sm font-medium rounded-lg hover:bg-scripture-800 transition-colors"
@@ -78,12 +78,12 @@ export default function FeedbackPage() {
           ) : (
             <form
               onSubmit={handleSubmit}
-              className="bg-white rounded-2xl shadow-sm border border-gray-200 p-6 md:p-8 space-y-5"
+              className="bg-white dark:bg-gray-800 rounded-2xl shadow-sm border border-gray-200 dark:border-gray-700 p-6 md:p-8 space-y-5"
             >
               {/* Name */}
               <div>
-                <label htmlFor="sg-name" className="block text-sm font-medium text-gray-700 mb-1">
-                  Name <span className="text-gray-400 font-normal">(optional)</span>
+                <label htmlFor="sg-name" className="block text-sm font-medium text-gray-700 dark:text-gray-200 mb-1">
+                  Name <span className="text-gray-400 dark:text-gray-500 font-normal">(optional)</span>
                 </label>
                 <input
                   id="sg-name"
@@ -91,14 +91,14 @@ export default function FeedbackPage() {
                   value={name}
                   onChange={e => setName(e.target.value)}
                   placeholder="Your name"
-                  className="w-full px-3 py-2 text-sm border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-scripture-400 focus:border-transparent"
+                  className="w-full px-3 py-2 text-sm border border-gray-300 dark:border-gray-600 dark:bg-gray-700 dark:text-gray-100 dark:placeholder-gray-400 rounded-lg focus:outline-none focus:ring-2 focus:ring-scripture-400 focus:border-transparent"
                 />
               </div>
 
               {/* Email */}
               <div>
-                <label htmlFor="sg-email" className="block text-sm font-medium text-gray-700 mb-1">
-                  Email <span className="text-gray-400 font-normal">(optional — only if you'd like a reply)</span>
+                <label htmlFor="sg-email" className="block text-sm font-medium text-gray-700 dark:text-gray-200 mb-1">
+                  Email <span className="text-gray-400 dark:text-gray-500 font-normal">(optional — only if you'd like a reply)</span>
                 </label>
                 <input
                   id="sg-email"
@@ -106,13 +106,13 @@ export default function FeedbackPage() {
                   value={email}
                   onChange={e => setEmail(e.target.value)}
                   placeholder="you@example.com"
-                  className="w-full px-3 py-2 text-sm border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-scripture-400 focus:border-transparent"
+                  className="w-full px-3 py-2 text-sm border border-gray-300 dark:border-gray-600 dark:bg-gray-700 dark:text-gray-100 dark:placeholder-gray-400 rounded-lg focus:outline-none focus:ring-2 focus:ring-scripture-400 focus:border-transparent"
                 />
               </div>
 
               {/* Message */}
               <div>
-                <label htmlFor="sg-message" className="block text-sm font-medium text-gray-700 mb-1">
+                <label htmlFor="sg-message" className="block text-sm font-medium text-gray-700 dark:text-gray-200 mb-1">
                   Suggestion or Feedback <span className="text-red-400">*</span>
                 </label>
                 <textarea
@@ -122,7 +122,7 @@ export default function FeedbackPage() {
                   required
                   rows={6}
                   placeholder="Tell me what you'd like to see — a new feature, a Bible topic, a study section, anything at all..."
-                  className="w-full px-3 py-2 text-sm border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-scripture-400 focus:border-transparent resize-none"
+                  className="w-full px-3 py-2 text-sm border border-gray-300 dark:border-gray-600 dark:bg-gray-700 dark:text-gray-100 dark:placeholder-gray-400 rounded-lg focus:outline-none focus:ring-2 focus:ring-scripture-400 focus:border-transparent resize-none"
                 />
               </div>
 
@@ -140,7 +140,7 @@ export default function FeedbackPage() {
                 {status === 'submitting' ? 'Sending…' : 'Send Suggestion'}
               </button>
 
-              <p className="text-xs text-gray-400 text-center">
+              <p className="text-xs text-gray-400 dark:text-gray-500 text-center">
                 Submitted suggestions are sent directly to the developer. Your email is never shared.
               </p>
             </form>

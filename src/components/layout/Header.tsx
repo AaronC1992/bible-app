@@ -1,4 +1,5 @@
 import { Link, useLocation } from 'react-router-dom';
+import { useTheme } from '../../contexts/ThemeContext';
 
 const NAV_LINKS = [
   { to: '/', label: 'Home' },
@@ -13,6 +14,7 @@ const NAV_LINKS = [
 
 export default function Header() {
   const location = useLocation();
+  const { dark, toggleDark } = useTheme();
 
   return (
     <header className="bg-scripture-800 text-white shadow-md sticky top-0 z-40">
@@ -37,7 +39,25 @@ export default function Header() {
               {link.label}
             </Link>
           ))}
+          <button
+            onClick={toggleDark}
+            title={dark ? 'Switch to light mode' : 'Switch to dark mode'}
+            className="ml-2 p-1.5 rounded text-scripture-200 hover:text-white hover:bg-scripture-700 transition-colors text-base leading-none"
+            aria-label="Toggle dark mode"
+          >
+            {dark ? '☀' : '🌙'}
+          </button>
         </nav>
+
+        {/* Mobile: theme toggle only (nav is handled by MobileNav) */}
+        <button
+          onClick={toggleDark}
+          title={dark ? 'Switch to light mode' : 'Switch to dark mode'}
+          className="md:hidden p-1.5 rounded text-scripture-200 hover:text-white hover:bg-scripture-700 transition-colors text-base leading-none"
+          aria-label="Toggle dark mode"
+        >
+          {dark ? '☀' : '🌙'}
+        </button>
       </div>
     </header>
   );

@@ -35,8 +35,8 @@ export default function HomePage() {
 
       {/* Hero */}
       <section className="text-center space-y-2 pt-4">
-        <h1 className="font-serif text-3xl font-bold text-scripture-800">Context Bible</h1>
-        <p className="text-gray-600 max-w-xl mx-auto">
+        <h1 className="font-serif text-3xl font-bold text-scripture-800 dark:text-scripture-100">Context Bible</h1>
+        <p className="text-gray-600 dark:text-gray-300 max-w-xl mx-auto">
           Read Scripture the way it was meant to be understood — with historical setting, literary context,
           cultural background, and thoughtful study notes alongside every passage.
         </p>
@@ -61,10 +61,10 @@ export default function HomePage() {
 
       {/* Continue Reading */}
       {lastRead && (
-        <section className="bg-parchment-100 border border-parchment-200 rounded-xl p-4 flex items-center justify-between gap-4">
+        <section className="bg-parchment-100 dark:bg-gray-800 border border-parchment-200 dark:border-gray-700 rounded-xl p-4 flex items-center justify-between gap-4">
           <div>
-            <p className="text-xs text-gray-500 font-medium uppercase tracking-wide mb-0.5">Continue Reading</p>
-            <p className="font-serif font-semibold text-gray-800">
+            <p className="text-xs text-gray-500 dark:text-gray-400 font-medium uppercase tracking-wide mb-0.5">Continue Reading</p>
+            <p className="font-serif font-semibold text-gray-800 dark:text-gray-100">
               {lastRead.bookName} {lastRead.chapter}
             </p>
           </div>
@@ -85,7 +85,7 @@ export default function HomePage() {
             value={searchInput}
             onChange={e => setSearchInput(e.target.value)}
             placeholder='Search — try "John 3:16" or "Romans 8"'
-            className="flex-1 rounded-lg border border-gray-300 px-4 py-2.5 text-sm focus:outline-none focus:ring-2 focus:ring-scripture-400"
+            className="flex-1 rounded-lg border border-gray-300 dark:border-gray-600 dark:bg-gray-700 dark:text-gray-100 dark:placeholder-gray-400 px-4 py-2.5 text-sm focus:outline-none focus:ring-2 focus:ring-scripture-400"
           />
           <button
             type="submit"
@@ -98,24 +98,24 @@ export default function HomePage() {
 
       {/* Feature Cards */}
       <section>
-        <h2 className="font-serif text-lg font-semibold text-gray-800 mb-3">Explore</h2>
+        <h2 className="font-serif text-lg font-semibold text-gray-800 dark:text-gray-100 mb-3">Explore</h2>
         <div className="grid grid-cols-2 sm:grid-cols-3 gap-3">
           {FEATURE_CARDS.map(card => (
             <Link
               key={card.to}
               to={card.to}
-              className="bg-white border border-gray-200 rounded-xl p-4 hover:shadow-md hover:border-scripture-300 transition-all group"
+              className="bg-white dark:bg-gray-800 border border-gray-200 dark:border-gray-700 rounded-xl p-4 hover:shadow-md hover:border-scripture-300 dark:hover:border-scripture-600 transition-all group"
             >
-              <p className="font-semibold text-gray-800 text-sm group-hover:text-scripture-700">{card.label}</p>
-              <p className="text-xs text-gray-500 mt-0.5">{card.desc}</p>
+              <p className="font-semibold text-gray-800 dark:text-gray-100 text-sm group-hover:text-scripture-700 dark:group-hover:text-scripture-300">{card.label}</p>
+              <p className="text-xs text-gray-500 dark:text-gray-400 mt-0.5">{card.desc}</p>
             </Link>
           ))}
         </div>
       </section>
 
       {/* App purpose blurb */}
-      <section className="bg-gray-50 border border-gray-200 rounded-xl p-5 text-sm text-gray-600 space-y-2">
-        <h2 className="font-serif font-semibold text-gray-800">Why Context Bible?</h2>
+      <section className="bg-gray-50 dark:bg-gray-800 border border-gray-200 dark:border-gray-700 rounded-xl p-5 text-sm text-gray-600 dark:text-gray-300 space-y-2">
+        <h2 className="font-serif font-semibold text-gray-800 dark:text-gray-100">Why Context Bible?</h2>
         <p>
           Most Bible apps show you the text. Context Bible helps you <em>understand</em> it.
           Every passage is shaped by history, culture, language, and literary form.

@@ -12,7 +12,7 @@ const MOBILE_NAV = [
 
 export default function MobileNav() {
   return (
-    <nav className="md:hidden fixed bottom-0 left-0 right-0 bg-white border-t border-gray-200 z-40 safe-area-inset-bottom">
+    <nav className="md:hidden fixed bottom-0 left-0 right-0 bg-white dark:bg-gray-900 border-t border-gray-200 dark:border-gray-700 z-40 safe-area-inset-bottom">
       <div className="flex">
         {MOBILE_NAV.map(item => (
           <NavLink
@@ -21,7 +21,7 @@ export default function MobileNav() {
             end={item.to === '/'}
             className={({ isActive }) =>
               `flex-1 flex flex-col items-center justify-center py-2 text-xs font-medium transition-colors ${
-                isActive ? 'text-scripture-700' : 'text-gray-500'
+                isActive ? 'text-scripture-700 dark:text-scripture-300' : 'text-gray-500 dark:text-gray-400'
               }`
             }
           >

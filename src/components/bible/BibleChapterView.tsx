@@ -10,7 +10,7 @@ interface BibleChapterViewProps {
 export default function BibleChapterView({ chapter, selectedVerse, onVerseClick }: BibleChapterViewProps) {
   return (
     <article className="space-y-1">
-      <h2 className="font-serif text-xl font-semibold text-scripture-800 mb-4">
+      <h2 className="font-serif text-xl font-semibold text-scripture-800 dark:text-scripture-100 mb-4">
         {chapter.bookName} {chapter.chapter}
       </h2>
       {chapter.verses.map(verse => (

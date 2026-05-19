@@ -24,8 +24,8 @@ export default function FavoritesPage() {
   return (
     <div className="max-w-2xl mx-auto px-4 py-6 space-y-4">
       <div>
-        <h1 className="font-serif text-2xl font-bold text-scripture-800 mb-1">Favorites</h1>
-        <p className="text-sm text-gray-500">
+        <h1 className="font-serif text-2xl font-bold text-scripture-800 dark:text-scripture-100 mb-1">Favorites</h1>
+        <p className="text-sm text-gray-500 dark:text-gray-400">
           {favorites.length === 0 ? 'No saved verses yet.' : `${favorites.length} saved verse${favorites.length !== 1 ? 's' : ''}`}
         </p>
       </div>
@@ -33,7 +33,7 @@ export default function FavoritesPage() {
       {favorites.length === 0 && (
         <div className="text-center py-14 text-gray-400">
           <p className="text-4xl mb-2">♡</p>
-          <p className="font-medium text-gray-500">No favorites yet</p>
+          <p className="font-medium text-gray-500 dark:text-gray-400">No favorites yet</p>
           <p className="text-sm mt-1">Tap a verse in the reader and press "Favorite" to save it here.</p>
         </div>
       )}
@@ -41,12 +41,12 @@ export default function FavoritesPage() {
       {favorites.map(fav => (
         <div
           key={fav.id}
-          className="bg-white border border-gray-200 rounded-xl p-4 hover:shadow-sm transition-shadow"
+          className="bg-white dark:bg-gray-800 border border-gray-200 dark:border-gray-700 rounded-xl p-4 hover:shadow-sm transition-shadow"
         >
           <div className="flex items-start justify-between gap-2 mb-2">
             <button
               onClick={() => handleOpen(fav)}
-              className="font-medium text-scripture-700 text-sm hover:text-scripture-900"
+              className="font-medium text-scripture-700 dark:text-scripture-300 text-sm hover:text-scripture-900 dark:hover:text-scripture-100"
             >
               {fav.verseRef}
             </button>
@@ -58,7 +58,7 @@ export default function FavoritesPage() {
               ✕
             </button>
           </div>
-          <p className="font-serif text-gray-700 text-sm leading-relaxed">{fav.verseText}</p>
+          <p className="font-serif text-gray-700 dark:text-gray-200 text-sm leading-relaxed">{fav.verseText}</p>
           <p className="text-xs text-gray-400 mt-2">Saved {formatDate(fav.savedAt)}</p>
         </div>
       ))}

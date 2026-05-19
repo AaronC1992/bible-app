@@ -76,15 +76,15 @@ export default function ReaderPage() {
       {/* Controls bar */}
       <div className="flex flex-wrap gap-2 mb-4 items-end">
         <div className="flex-1 min-w-[160px]">
-          <label className="block text-xs text-gray-500 mb-1 font-medium">Book</label>
+          <label className="block text-xs text-gray-500 dark:text-gray-400 mb-1 font-medium">Book</label>
           <BookSelector selectedBookId={bookId} onChange={id => { setBookId(id); setChapterNumber(1); }} />
         </div>
         <div className="w-36">
-          <label className="block text-xs text-gray-500 mb-1 font-medium">Chapter</label>
+          <label className="block text-xs text-gray-500 dark:text-gray-400 mb-1 font-medium">Chapter</label>
           <ChapterSelector bookId={bookId} selectedChapter={chapterNumber} onChange={setChapterNumber} />
         </div>
         <div className="flex-1 min-w-[180px]">
-          <label className="block text-xs text-gray-500 mb-1 font-medium">Translation</label>
+          <label className="block text-xs text-gray-500 dark:text-gray-400 mb-1 font-medium">Translation</label>
           <TranslationSelector
             translations={translations.length ? translations : [{ id: 'WEB', name: 'World English Bible', abbreviation: 'WEB', language: 'English' }]}
             selectedId={translationId}
@@ -117,24 +117,24 @@ export default function ReaderPage() {
             </div>
           )}
           {!loading && !error && chapter && (
-            <div className="bg-white rounded-xl border border-gray-200 p-4 md:p-6">
+            <div className="bg-white dark:bg-gray-800 rounded-xl border border-gray-200 dark:border-gray-700 p-4 md:p-6">
               <BibleChapterView
                 chapter={chapter}
                 selectedVerse={selectedVerse}
                 onVerseClick={handleVerseClick}
               />
               {/* Chapter navigation */}
-              <div className="flex justify-between mt-6 pt-4 border-t border-gray-100">
+              <div className="flex justify-between mt-6 pt-4 border-t border-gray-100 dark:border-gray-700">
                 <button
                   disabled={chapterNumber <= 1}
                   onClick={() => { const prev = chapterNumber - 1; setChapterNumber(prev); void loadChapter(translationId, bookId, prev); }}
-                  className="text-sm text-scripture-600 hover:text-scripture-800 disabled:text-gray-300 font-medium"
+                  className="text-sm text-scripture-600 dark:text-scripture-300 hover:text-scripture-800 dark:hover:text-scripture-100 disabled:text-gray-300 dark:disabled:text-gray-600 font-medium"
                 >
                   ← Previous
                 </button>
                 <button
                   onClick={() => { const next = chapterNumber + 1; setChapterNumber(next); void loadChapter(translationId, bookId, next); }}
-                  className="text-sm text-scripture-600 hover:text-scripture-800 font-medium"
+                  className="text-sm text-scripture-600 dark:text-scripture-300 hover:text-scripture-800 dark:hover:text-scripture-100 font-medium"
                 >
                   Next →
                 </button>
@@ -142,9 +142,9 @@ export default function ReaderPage() {
             </div>
           )}
           {!loading && !error && !chapter && (
-            <div className="bg-white rounded-xl border border-gray-200 p-12 text-center text-gray-400">
+            <div className="bg-white dark:bg-gray-800 rounded-xl border border-gray-200 dark:border-gray-700 p-12 text-center text-gray-400 dark:text-gray-500">
               <p className="text-4xl mb-3">📖</p>
-              <p className="font-medium text-gray-600">Select a book and chapter to begin reading</p>
+              <p className="font-medium text-gray-600 dark:text-gray-400">Select a book and chapter to begin reading</p>
             </div>
           )}
         </div>
@@ -153,11 +153,11 @@ export default function ReaderPage() {
         {panelOpen && selectedVerse && (
           <>
             {/* Mobile: full-screen overlay */}
-            <div className="fixed inset-0 z-30 bg-white md:hidden overflow-y-auto">
+            <div className="fixed inset-0 z-30 bg-white dark:bg-gray-800 md:hidden overflow-y-auto">
               <StudyContextPanel verse={selectedVerse} onClose={() => setPanelOpen(false)} />
             </div>
             {/* Desktop: sidebar */}
-            <div className="hidden md:flex md:w-96 lg:w-[420px] shrink-0 flex-col border border-gray-200 rounded-xl overflow-hidden" style={{ maxHeight: 'calc(100vh - 120px)', position: 'sticky', top: '72px' }}>
+            <div className="hidden md:flex md:w-96 lg:w-[420px] shrink-0 flex-col border border-gray-200 dark:border-gray-700 rounded-xl overflow-hidden" style={{ maxHeight: 'calc(100vh - 120px)', position: 'sticky', top: '72px' }}>
               <StudyContextPanel verse={selectedVerse} onClose={() => setPanelOpen(false)} />
             </div>
           </>

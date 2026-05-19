@@ -18,14 +18,14 @@ export default function VerseCard({ verse, isSelected, onClick }: VerseCardProps
       onClick={() => onClick(verse)}
       className={`group cursor-pointer rounded px-2 py-1 leading-relaxed transition-colors ${
         isSelected
-          ? 'bg-scripture-100 ring-2 ring-scripture-400'
-          : `hover:bg-gray-100 ${highlightClass}`
+          ? 'bg-scripture-100 dark:bg-scripture-900/40 ring-2 ring-scripture-400 dark:ring-scripture-600'
+          : `hover:bg-gray-100 dark:hover:bg-gray-700 ${highlightClass}`
       }`}
     >
-      <sup className={`mr-1 text-xs font-bold select-none ${isSelected ? 'text-scripture-600' : 'text-gray-400 group-hover:text-scripture-500'}`}>
+      <sup className={`mr-1 text-xs font-bold select-none ${isSelected ? 'text-scripture-600 dark:text-scripture-300' : 'text-gray-400 dark:text-gray-600 group-hover:text-scripture-500 dark:group-hover:text-scripture-400'}`}>
         {verse.verse}
       </sup>
-      <span className="font-serif text-gray-800">{verse.text}</span>
+      <span className="font-serif text-gray-800 dark:text-gray-100">{verse.text}</span>
     </p>
   );
 }

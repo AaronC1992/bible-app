@@ -1,4 +1,5 @@
 import { HashRouter, Routes, Route } from 'react-router-dom';
+import { ThemeProvider } from './contexts/ThemeContext';
 import AppLayout from './components/layout/AppLayout';
 import HomePage from './pages/HomePage';
 import ReaderPage from './pages/ReaderPage';
@@ -11,9 +12,10 @@ import FeedbackPage from './pages/FeedbackPage';
 
 export default function App() {
   return (
-    <HashRouter>
-      <AppLayout>
-        <Routes>
+    <ThemeProvider>
+      <HashRouter>
+        <AppLayout>
+          <Routes>
           <Route path="/" element={<HomePage />} />
           <Route path="/reader" element={<ReaderPage />} />
           <Route path="/search" element={<SearchPage />} />
@@ -22,8 +24,9 @@ export default function App() {
           <Route path="/reading-plan" element={<ReadingPlanPage />} />
           <Route path="/study-guide" element={<StudyGuidePage />} />
           <Route path="/feedback" element={<FeedbackPage />} />
-        </Routes>
-      </AppLayout>
-    </HashRouter>
+          </Routes>
+        </AppLayout>
+      </HashRouter>
+    </ThemeProvider>
   );
 }
